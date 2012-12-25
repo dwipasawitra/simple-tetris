@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="block.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="734" topLine="12" />
+	</File>
+	<File name="block.h" open="1" top="0" tabpos="3">
+		<Cursor position="436" topLine="9" />
+	</File>
+	<File name="color.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="134" topLine="0" />
+	</File>
+	<File name="color.h" open="0" top="0" tabpos="0">
+		<Cursor position="11" topLine="0" />
+	</File>
+	<File name="game.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="14245" topLine="415" />
+	</File>
+	<File name="game.h" open="1" top="0" tabpos="5">
+		<Cursor position="1160" topLine="33" />
+	</File>
+	<File name="highscores.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="53" topLine="0" />
+	</File>
+	<File name="highscores.h" open="0" top="0" tabpos="0">
+		<Cursor position="48" topLine="0" />
+	</File>
+	<File name="main.h" open="1" top="0" tabpos="4">
+		<Cursor position="638" topLine="20" />
+	</File>
+	<File name="tetris.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="2649" topLine="19" />
+	</File>
+	<File name="tetris.h" open="1" top="0" tabpos="2">
+		<Cursor position="615" topLine="13" />
+	</File>
+</CodeBlocks_layout_file>
