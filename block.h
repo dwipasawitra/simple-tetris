@@ -1,13 +1,64 @@
-#include <shape.h>
-#include <color.h>
-using namespace std;
+/*
+ *
+ * TETRIS VARIATION OF SHAPE
+ *
+ * {} = move point, tracked every new piece move
+ * (m,n) = coordinate of move point
+ *
+ * ** Variation 1 **
+ * A:  Draw (m-1,n)(m,n)(m+1,n)(m+2,n)
+ * []{}[][]
+ *
+ * B:  Draw (m,n-1)(m,n)(m,n+1)(m,n+2)
+ * []
+ * {}
+ * []
+ * []
+ *
+ * ** Variaton 2 **
+ * A:  Draw (m,n)(m+1,n)(m,n-1)(m+1,n+1)
+ * []
+ * {}[]
+ *   []
+ *
+ * B:  Draw(m,n)(m-1,n)(m,n+1)(m+1,n+1)
+ *
+ * []{}
+ *   [][]
+ *
+ * ** Variaton 3 **
+ * A:  Draw (m,n)(m,n+1)(m-1,n)(m-1,n-1)
+ * []
+ * []{}
+ *   []
+ *
+ * B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
+ *   [][]
+ * []{}
+ *
+ * ** Variation 4 **
+ * A:  Draw (m,n)(m+1,n+1)(m+1,n)(m+1,n+1)
+ * {}[]
+ * [][]
+ *
+ */
 
-class block()
+#pragma once
+#include "main.h"
+
+
+class block
 {
-      public:
-             block(void);
-             ~block(void);
-             void getcolor();
-             void setecolor(newcolor:color);
-             void getstate();
-             void setstate(state:int);
+private:
+    int blockColor;
+    int state;
+public:
+    int getColor();
+    void setColor(int newColor);
+    int getState();
+    int setState(int newState);
+    block(int newColor, int newState);
+};
+
+
+

@@ -52,6 +52,9 @@ protected:
     void destroyLine();
     void clearBlock();
 
+    // Debug
+    void printMatrices();
+
 };
 
 class interfaceTetris : public game

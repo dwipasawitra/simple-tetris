@@ -1,7 +1,8 @@
-#include <color.h>
+#include "color.h"
 
-int main()
+color::color(int red, int green, int blue)
 {
-    int red,gree,blue;
-    return 0;
+    this->red = red;
+    this->green = green;
+    this->blue = blue;
 }

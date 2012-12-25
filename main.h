@@ -13,14 +13,19 @@
 
 #include <allegro.h>
 #include <string>
+#include <iostream>
+#include <cstdio>
 
-#define GAME_LOOP_SPEED_NORMAL 50
-#define GAME_LOOP_SPEED_TURBO 25
+
+#define GAME_LOOP_SPEED_NORMAL 200
+#define GAME_LOOP_SPEED_TURBO 100
 #define GAME_CANVAS_START_X 20
 #define GAME_CANVAS_START_Y 0
 #define GAME_CANVAS_BACKGROUND makecol(170, 238, 255)
 #define GAME_STATE_NEWSHAPE_COMEOUT 0
 #define GAME_STATE_NEWSHAPE_FALL 1
+#define GAME_MAX_X 16
+#define GAME_MAX_Y 28
 
 #define TETRIS_INTERFACE_MENU 0
 #define TETRIS_INTERFACE_GAME 1

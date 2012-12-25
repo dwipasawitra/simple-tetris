@@ -1,19 +1,17 @@
 # depslib dependency file v1.0
-1356353422 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.cpp
-	<block.h>
-	<color.h>
-	<shape.h>
+1356416517 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.cpp
+	"block.h"
 
-1356353402 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.cpp
+1356416109 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.cpp
 	"color.h"
 
-1356358062 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.h
+1356416212 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.h
 
 1356353440 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.cpp
 	<highscores.h>
 	<score.h>
 
-1356353370 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.cpp
+1356430913 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.cpp
 	"tetris.h"
 	"main.h"
 
@@ -22,9 +20,11 @@
 	"highscores.h"
 	"game.h"
 
-1356355204 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.h
+1356438079 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.h
 	<allegro.h>
 	<string>
+	<iostream>
+	<cstdio>
 
 1356354084 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.h
 	<stdlib.h>
@@ -36,19 +36,18 @@
 1356353430 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/shape.cpp
 	<shape.h>
 
-1356356645 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/tetris.cpp
+1356437118 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/tetris.cpp
 	"tetris.h"
 	"main.h"
 
-1356358108 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.h
+1356431790 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.h
 	"main.h"
 	"highscores.h"
 	"block.h"
 
-1356358096 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.h
+1356429264 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.h
 	"main.h"
-	"color.h"
 
-1356358115 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.cpp
+1356438967 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.cpp
 	"game.h"
 

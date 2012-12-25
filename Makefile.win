@@ -5,8 +5,8 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = Tetris_private.res
-OBJ  = main.o $(RES)
-LINKOBJ  = main.o $(RES)
+OBJ  = main.o tetris.o color.o block.o shape.o highscores.o score.o $(RES)
+LINKOBJ  = main.o tetris.o color.o block.o shape.o highscores.o score.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib" -mwindows -lallegro-4.4.2-monolith-mt 
 INCS =  -I"C:/Dev-Cpp/include" 
 CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
@@ -28,6 +28,24 @@ $(BIN): $(OBJ)
 
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+tetris.o: tetris.cpp
+	$(CPP) -c tetris.cpp -o tetris.o $(CXXFLAGS)
+
+color.o: color.cpp
+	$(CPP) -c color.cpp -o color.o $(CXXFLAGS)
+
+block.o: block.cpp
+	$(CPP) -c block.cpp -o block.o $(CXXFLAGS)
+
+shape.o: shape.cpp
+	$(CPP) -c shape.cpp -o shape.o $(CXXFLAGS)
+
+highscores.o: highscores.cpp
+	$(CPP) -c highscores.cpp -o highscores.o $(CXXFLAGS)
+
+score.o: score.cpp
+	$(CPP) -c score.cpp -o score.o $(CXXFLAGS)
 
 Tetris_private.res: Tetris_private.rc 
 	$(WINDRES) -i Tetris_private.rc --input-format=rc -o Tetris_private.res -O coff 

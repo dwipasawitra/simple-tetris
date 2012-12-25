@@ -1,3 +1,4 @@
+/*
 #include <shape.h>
 
 int main()
@@ -5,3 +6,4 @@ int main()
     int rotation;
     return 0;
 }
+*/

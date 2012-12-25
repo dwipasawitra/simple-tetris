@@ -1,10 +1,11 @@
-#include <conio>
-#include <stdlib>
-using namespace std;
-
 class color
 {
-      public:
-             to_int(int);
-             void to_int();
+private:
+    int red;
+    int green;
+    int blue;
+public:
+    int toInt();
+    color(int red, int green, int blue);
+    static color getNew16color();
 };
