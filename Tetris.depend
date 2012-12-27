@@ -51,3 +51,76 @@
 1356438967 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.cpp
 	"game.h"
 
+1356416517 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/block.cpp
+	"block.h"
+
+1356429264 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/block.h
+	"main.h"
+
+1356506953 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/main.h
+	<allegro.h>
+	<string>
+	<iostream>
+	<cstdio>
+
+1356416109 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/color.cpp
+	"color.h"
+
+1356416212 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/color.h
+
+1356353440 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/highscores.cpp
+	<highscores.h>
+	<score.h>
+
+1356430913 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/main.cpp
+	"tetris.h"
+	"main.h"
+
+1356358161 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/tetris.h
+	"main.h"
+	"highscores.h"
+	"game.h"
+
+1356354084 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/highscores.h
+	<stdlib.h>
+	<conio.h>
+
+1356508474 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/game.h
+	"highscores.h"
+	"block.h"
+	"canvas.h"
+	"logic.h"
+	"control.h"
+	"main.h"
+
+1356506549 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/canvas.h
+	"game.h"
+	"block.h"
+
+1356508941 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/logic.h
+	"game.h"
+	"main.h"
+
+1356505961 /media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/control.h
+	"game.h"
+
+1356353448 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/score.cpp
+	<score.h>
+
+1356437118 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/tetris.cpp
+	"tetris.h"
+	"main.h"
+
+1356506269 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/canvas.cpp
+	"canvas.h"
+
+1356508987 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/control.cpp
+	"control.h"
+
+1356508646 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/game.cpp
+	"game.h"
+	"main.h"
+
+1356509667 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/logic.cpp
+	"logic.h"
+

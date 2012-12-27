@@ -24,12 +24,18 @@
 		</Compiler>
 		<Unit filename="block.cpp" />
 		<Unit filename="block.h" />
+		<Unit filename="canvas.cpp" />
+		<Unit filename="canvas.h" />
 		<Unit filename="color.cpp" />
 		<Unit filename="color.h" />
+		<Unit filename="control.cpp" />
+		<Unit filename="control.h" />
 		<Unit filename="game.cpp" />
 		<Unit filename="game.h" />
 		<Unit filename="highscores.cpp" />
 		<Unit filename="highscores.h" />
+		<Unit filename="logic.cpp" />
+		<Unit filename="logic.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Unit filename="score.cpp" />

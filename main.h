@@ -50,3 +50,8 @@
 
 
 using namespace std;
+class game;
+class logic;
+class control;
+class canvas;
+class interfacegame;
