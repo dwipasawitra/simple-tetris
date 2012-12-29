@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="block.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="174" topLine="7" />
+	<File name="logic.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="block.h" open="0" top="0" tabpos="3">
-		<Cursor position="491" topLine="39" />
+	<File name="logic.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="canvas.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="866" topLine="0" />
+	<File name="game.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="canvas.h" open="0" top="0" tabpos="0">
-		<Cursor position="71" topLine="0" />
+	<File name="control.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="color.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="134" topLine="0" />
+	<File name="block.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="517" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="color.h" open="0" top="0" tabpos="0">
-		<Cursor position="11" topLine="0" />
+	<File name="main.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="713" topLine="35" />
+		</Cursor>
 	</File>
-	<File name="control.cpp" open="1" top="1" tabpos="6">
-		<Cursor position="246" topLine="0" />
+	<File name="main.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="231" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="control.h" open="1" top="0" tabpos="5">
-		<Cursor position="253" topLine="0" />
+	<File name="tetris.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="game.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1601" topLine="58" />
+	<File name="tetris.cpp" open="1" top="1" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="793" topLine="18" />
+		</Cursor>
 	</File>
-	<File name="game.h" open="1" top="0" tabpos="1">
-		<Cursor position="557" topLine="13" />
+	<File name="highscores.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="highscores.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="53" topLine="0" />
+	<File name="block.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="highscores.h" open="0" top="0" tabpos="0">
-		<Cursor position="48" topLine="0" />
+	<File name="game.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1373" topLine="63" />
+		</Cursor>
 	</File>
-	<File name="logic.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="21556" topLine="575" />
-	</File>
-	<File name="logic.h" open="1" top="0" tabpos="2">
-		<Cursor position="637" topLine="17" />
-	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="109" topLine="0" />
-	</File>
-	<File name="main.h" open="1" top="0" tabpos="7">
-		<Cursor position="519" topLine="16" />
-	</File>
-	<File name="tetris.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="2581" topLine="90" />
-	</File>
-	<File name="tetris.h" open="0" top="0" tabpos="2">
-		<Cursor position="615" topLine="13" />
+	<File name="control.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="281" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

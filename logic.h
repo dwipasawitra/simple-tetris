@@ -6,7 +6,6 @@
 class logic
 {
 friend class control;
-friend class logic;
 friend class canvas;
 private:
 

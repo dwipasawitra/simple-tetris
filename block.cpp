@@ -29,7 +29,7 @@ int block::getState()
     return this->state;
 }
 
-int block::setState(int newBlockState)
+void block::setState(int newBlockState)
 {
     this->state = newBlockState;
 }

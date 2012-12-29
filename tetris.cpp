@@ -16,14 +16,23 @@
 
 void tetris::initWindow()
 {
+    cout << "Class started" << endl;
     /* Allegro Initializer */
     allegro_init();
     install_keyboard();     // Install keyboard driver
     install_timer();        // Install timer driver
-    set_color_depth(16);
+    set_color_depth(desktop_color_depth());
 
     /* Create a new Window */
-    set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0);
+    if(os_type == OSTYPE_LINUX)
+    {
+        set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0);
+    }
+    else
+    {
+        set_gfx_mode(GFX_GDI, 640, 480, 0, 0);
+
+    }
 
 
     // OK, now you can draw anything in that window :)
@@ -43,6 +52,7 @@ void tetris::destroyWindow()
 
 void tetris::start()       // Start game method
 {
+
     // Init a new Allegro Window
     this->initWindow();
 
@@ -54,12 +64,15 @@ void tetris::start()       // Start game method
     {
         switch(this->interfaceState)
         {
-            case TETRIS_INTERFACE_MENU:
-                this->mainMenu(); break;
-            case TETRIS_INTERFACE_GAME:
-                this->tetrisInterface(); break;
-            case TETRIS_INTERFACE_HIGHSCORE:
-                this->highScores(); break;
+        case TETRIS_INTERFACE_MENU:
+            this->mainMenu();
+            break;
+        case TETRIS_INTERFACE_GAME:
+            this->tetrisInterface();
+            break;
+        case TETRIS_INTERFACE_HIGHSCORE:
+            this->highScores();
+            break;
         }
     }
 
@@ -72,6 +85,8 @@ void tetris::mainMenu()    // Open Main menu interface
 
     // First, clear screen
     this->clearWindow();
+
+    cout << "Menu show";
 
     // Draw a selection text
     textout_centre_ex(screen, font, "TETRIS", SCREEN_W/2, 40, COLOR_WHITE, 0);
@@ -116,7 +131,7 @@ void tetris::highScores()  // Open highscore interface
 
 tetris::tetris(int startInterface)
 {
-
+    interfaceState = startInterface;
 }
 tetris::~tetris()
 {

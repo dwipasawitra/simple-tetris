@@ -56,7 +56,7 @@ public:
     int getColor();
     void setColor(int newColor);
     int getState();
-    int setState(int newState);
+    void setState(int newState);
     block(int newColor, int newState);
 };
 
