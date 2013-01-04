@@ -197,3 +197,76 @@
 1356514901 source:e:\journal\2012a\pbo\fp\simple-tetris\control.cpp
 	"control.h"
 
+1357298882 source:e:\simple-tetris\block.cpp
+	"block.h"
+
+1357298882 e:\simple-tetris\block.h
+	"main.h"
+
+1357298882 e:\simple-tetris\main.h
+	<allegro.h>
+	<string>
+	<iostream>
+	<cstdio>
+
+1357298882 source:e:\simple-tetris\canvas.cpp
+	"canvas.h"
+
+1357298882 e:\simple-tetris\canvas.h
+	"game.h"
+	"block.h"
+
+1357298882 e:\simple-tetris\game.h
+	"highscores.h"
+	"block.h"
+	"canvas.h"
+	"logic.h"
+	"control.h"
+	"main.h"
+
+1357298882 e:\simple-tetris\highscores.h
+	<stdlib.h>
+	<conio.h>
+
+1357298882 e:\simple-tetris\logic.h
+	"game.h"
+	"main.h"
+
+1357298882 e:\simple-tetris\control.h
+	"game.h"
+
+1357298882 source:e:\simple-tetris\color.cpp
+	"color.h"
+
+1357298882 e:\simple-tetris\color.h
+
+1357298882 source:e:\simple-tetris\control.cpp
+	"control.h"
+
+1357298882 source:e:\simple-tetris\game.cpp
+	"game.h"
+	"main.h"
+
+1357298882 source:e:\simple-tetris\highscores.cpp
+	<highscores.h>
+	<score.h>
+
+1357298882 source:e:\simple-tetris\logic.cpp
+	"logic.h"
+
+1357298882 source:e:\simple-tetris\main.cpp
+	"tetris.h"
+	"main.h"
+
+1357298882 e:\simple-tetris\tetris.h
+	"main.h"
+	"highscores.h"
+	"game.h"
+
+1357298882 source:e:\simple-tetris\score.cpp
+	<score.h>
+
+1357298882 source:e:\simple-tetris\tetris.cpp
+	"tetris.h"
+	"main.h"
+
