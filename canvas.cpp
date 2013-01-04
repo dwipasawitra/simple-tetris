@@ -16,9 +16,12 @@ void canvas::redrawGraphic()
     // No:  Draw it when matrix cell present
     //      Keep it when matrix cell doesn't present
 
+    // NOT IMPLEMENTED YET, Using inefficient redrawing algorithm
+
+
     int i, j;
 
-    // Iterator
+    /*
     for(i=0;i<GAME_MAX_X;i++)
     {
         for(j=0;j<GAME_MAX_Y;j++)
@@ -30,12 +33,34 @@ void canvas::redrawGraphic()
                     this->clearBlock(i, j);
                 }
             }
-            else if(gameParent->gameBlock[i][j] != NULL)
+            else
             {
-                this->drawBlock(i, j, gameParent->gameBlock[i][j]);
+                if(gameParent->gameBlock[i][j] != NULL)
+                {
+                    this->drawBlock(i, j, gameParent->gameBlock[i][j]);
+                }
             }
         }
     }
+    */
+
+
+
+    for(i=0;i<GAME_MAX_X;i++)
+    {
+        for(j=0;j<GAME_MAX_Y;j++)
+        {
+            if(gameParent->gameBlock[i][j] != NULL)
+            {
+                this->drawBlock(i, j, gameParent->gameBlock[i][j]);
+            }
+            else
+            {
+                this->clearBlock(i, j);
+            }
+        }
+    }
+
 }
 
 void canvas::drawBlock(int x, int y, block *property)
@@ -53,17 +78,19 @@ void canvas::drawBlock(int x, int y, block *property)
         y = y-4;
     }
 
-    // drawPoint = Center point of each block
-    drawPointX = (20*x + 10) + GAME_CANVAS_START_X;
-    drawPointY = (20*y + 10) + GAME_CANVAS_START_Y;
+    // drawPoint = Left top point of each block
+    drawPointX = (20*x) + GAME_CANVAS_START_X;
+    drawPointY = (20*y) + GAME_CANVAS_START_Y;
 
-    // From center point, draw the 20x20 box;
-    blockColor = property->getColor();
+    // From left top point, draw the image
 
-    //rectfill(screen, drawPointX-10, drawPointY-10, drawPointX+10, drawPointX+10, blockColor);
-    circlefill(screen, drawPointX, drawPointY, 9, blockColor);
+    blit(property->getImage(), screen, 0, 0, drawPointX, drawPointY, 20, 20);
 
-    // Done
+    // Save drawPoint on property
+    // So we can check if there is a block on that point later
+    //property->posX = drawPointX;
+    //property->poxY = drawPointY;
+
 }
 
 void canvas::clearBlock(int x, int y)
@@ -80,18 +107,19 @@ void canvas::clearBlock(int x, int y)
         y = y-4;
     }
 
-    // drawPoint = Center point of each block
-    drawPointX = (20*x + 10) + GAME_CANVAS_START_X;
-    drawPointY = (20*y + 10) + GAME_CANVAS_START_Y;
+    // drawPoint = left top point of each block
+    drawPointX = (20*x) + GAME_CANVAS_START_X;
+    drawPointY = (20*y) + GAME_CANVAS_START_Y;
 
-    // From center point, clear its 20x20 box;
-    //rectfill(screen, drawPointX-10, drawPointY-10, 20, 20, GAME_CANVAS_BACKGROUND);
-    //rectfill(screen, drawPointX-10, drawPointY-10, drawPointX+10, drawPointX+10, GAME_CANVAS_BACKGROUND);
-    circlefill(screen, drawPointX, drawPointY, 9, GAME_CANVAS_BACKGROUND);
+    // From left top point, draw background in that position
+    blit(gameParent->background, screen, drawPointX, drawPointY, drawPointX, drawPointY, 20, 20);
 
     // Done
 }
 
+// Unused because efficient redraw algorith hadn't implemented yet
+
+/*
 bool canvas::checkPoint(int x, int y)
 {
     int checkPointX, checkPointY;
@@ -107,17 +135,11 @@ bool canvas::checkPoint(int x, int y)
     }
 
     // checkPoint = Center point of each block
-    checkPointX = (20*x + 10) + GAME_CANVAS_START_X;
-    checkPointY = (20*y + 10) + GAME_CANVAS_START_Y;
+    checkPointX = (20*x+10) + GAME_CANVAS_START_X;
+    checkPointY = (20*y+10) + GAME_CANVAS_START_Y;
 
-    // Check if there is something other than GAME_CANVAS_BACKGROUND in drawPoint
-    if(getpixel(screen, checkPointX, checkPointY) == GAME_CANVAS_BACKGROUND)
-    {
-        //cout << "CANVAS: Point " << checkPointX << "," << checkPointY << " does have GAME_CANVAS_BACKGROUND" << endl;
-        return 0;
-    }
-    else
-    {
-        return 1;
-    }
+    // Check current property on that block
+    return is_inside_bitmap(gameParent->background, checkPointX, checkPointY, 0);
 }
+*/
+

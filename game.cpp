@@ -7,6 +7,9 @@
 /*
 void game::printMatrices()
 {
+    int m = gameLogic->m;
+    int n = gameLogic->n;
+
     cout << endl;
     cout << "M = " << m << ", N = " << n << endl;
     int i, j;
@@ -24,6 +27,8 @@ void game::printMatrices()
 }
 */
 
+
+
 // Interface Tetris class implementation
 interfaceTetris::interfaceTetris()
 {
@@ -38,6 +43,24 @@ interfaceTetris::interfaceTetris()
             this->gameBlock[i][j] = NULL;
 }
 
+void interfaceTetris::initScreen()
+{
+    // Display Background
+    this->background = load_bitmap("background.pcx", NULL);
+    blit(background, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+    // Set game border
+    this->gameBorder = load_bitmap("border.bmp", NULL);
+    blit(gameBorder, screen, 0, 0, 10, 10, 340, 460);
+    blit(background, screen, 20, 20, 20, 20, 320, 440);
+
+    // Display Next Shape
+    this->gameNextShape->redrawNextShape();
+
+    // Display score board
+
+}
+
 void interfaceTetris::newGame()
 {
     // Clear the game screen
@@ -47,6 +70,9 @@ void interfaceTetris::newGame()
     // Start with new shape come out
     //cout << "Set gamestate to GAME_STATE_NEWSHAPE_COMEMOUT" << endl;
     this->gameLogic->resetState();
+
+    // Wait for user to press ENTER
+    while(!key[KEY_ENTER]);
 
     // OK, game loop starter until you are game over
     //cout << "Starting Game loop.." << endl;
@@ -63,6 +89,7 @@ game::game()
     this->gameCanvas = new canvas(this);
     this->gameControl = new control(this);
     this->gameLogic = new logic(this);
+    this->gameNextShape = new nextshape();
 }
 
 void game::gameLoop()
@@ -73,13 +100,27 @@ void game::gameLoop()
 
     // OK now start the game loop
     //cout << "[GAME LOOP STARTED]" << endl;
-    gameLogic->gameLogicLoop();
+    while(!gameOver)
+    {
+        // Draw next shape type
+
+        // Draw score board
+
+
+        // Draw a game
+        // Game iteration start here
+        gameOver = gameLogic->gameLogicIteration();
+
+    }
+
+    // Game over state, now freeze the game screen
+    // Show game over text
 
 
 }
 
 
-void game::newScore(string playerName)
+void game::newScore()
 {
 
 }

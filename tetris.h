@@ -19,12 +19,15 @@
 
 
 
+
 class tetris
 {
 private:
     int interfaceState;
     //highscores *scoresData;
     interfaceTetris *gameIface;
+    FONT *gameFont;
+    PALLETE pallete;
 
     void initWindow();
     void clearWindow();

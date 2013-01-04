@@ -13,6 +13,8 @@
 #include "tetris.h"
 #include "main.h"
 
+// Game font definition
+
 
 void tetris::initWindow()
 {
@@ -22,6 +24,12 @@ void tetris::initWindow()
     install_keyboard();     // Install keyboard driver
     install_timer();        // Install timer driver
     set_color_depth(desktop_color_depth());
+
+    /* Game Font Experiment */
+    gameFont = load_font("font.pcx", pallete, NULL);
+    if (!gameFont)
+         cout << "Couldn't load font!";
+    /* End of Game Font Experiment */
 
     /* Create a new Window */
     if(os_type == OSTYPE_LINUX)
@@ -89,10 +97,11 @@ void tetris::mainMenu()    // Open Main menu interface
     cout << "Menu show";
 
     // Draw a selection text
-    textout_centre_ex(screen, font, "TETRIS", SCREEN_W/2, 40, COLOR_WHITE, 0);
-    textout_centre_ex(screen, font, "1. Mulai Permainan", SCREEN_W/2, 80, COLOR_WHITE,0);
-    textout_centre_ex(screen, font, "2. Skor tertinggi", SCREEN_W/2, 90, COLOR_WHITE, 0);
-    textout_centre_ex(screen, font, "3. Tentang permainan ini", SCREEN_W/2, 100, COLOR_WHITE, 0);
+    // Change "font" to "gameFont" to implement font experiment
+    textout_centre_ex(screen, gameFont, "TETRIS", SCREEN_W/2, 40, COLOR_WHITE, 0);
+    textout_centre_ex(screen, gameFont, "1. Mulai Permainan", SCREEN_W/2, 80, COLOR_WHITE,0);
+    textout_centre_ex(screen, gameFont, "2. Skor tertinggi", SCREEN_W/2, 113, COLOR_WHITE, 0);
+    textout_centre_ex(screen, gameFont, "3. Tentang permainan ini", SCREEN_W/2, 146, COLOR_WHITE, 0);
 
     // OK select the menu, 1, 2 or 3
     while(!selected)
@@ -114,11 +123,8 @@ void tetris::tetrisInterface() // Open Tetris interface
 {
     this->clearWindow();
 
-    // Initializing a screen for your tetris, bro
-    rectfill(screen, 20, 0, 320, 480, GAME_CANVAS_BACKGROUND);
-
-    // Wait for use to press enter
-    while(!key[KEY_ENTER]);
+    // Initialization game Interface
+    gameIface->initScreen();
 
     // Now interfaceTetris class will do the rest thing;
     gameIface->newGame();

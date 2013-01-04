@@ -28,7 +28,7 @@ private:
     void destroyLine();
 
 public:
-    void gameLogicLoop();
+    bool gameLogicIteration();
     int get_nextShapeType();
     void set_nextShapeType(int nextShapeType);
     void rotateShape();

@@ -14,14 +14,35 @@
 
 #include "block.h"
 
-int block::getColor()
+BITMAP *block::getImage()
 {
-    return this->blockColor;
+    return blockImage;
 }
 
 void block::setColor(int newColor)
 {
-    this->blockColor = newColor;
+    // Depending on its color, choose the right bitmap
+
+    switch(newColor)
+    {
+
+    case BLOCK_COLOR_BLACK:
+        this->blockImage = load_bitmap("block_black.bmp", NULL);
+        break;
+    case BLOCK_COLOR_BLUE:
+        this->blockImage = load_bitmap("block_blue.bmp", NULL);
+        break;
+    case BLOCK_COLOR_GREEN:
+        this->blockImage = load_bitmap("block_green.bmp", NULL);
+        break;
+    case BLOCK_COLOR_RED:
+        this->blockImage = load_bitmap("block_red.bmp", NULL);
+        break;
+    case BLOCK_COLOR_YELLOW:
+        this->blockImage = load_bitmap("block_yellow.bmp", NULL);
+        break;
+
+    }
 }
 
 int block::getState()
@@ -36,6 +57,7 @@ void block::setState(int newBlockState)
 
 block::block(int newColor, int newBlockState)
 {
+    // Set bitmap depending on its color
     this->setColor(newColor);
     this->setState(newBlockState);
 }

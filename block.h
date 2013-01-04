@@ -50,13 +50,16 @@
 class block
 {
 private:
-    int blockColor;
+    BITMAP *blockImage;
     int state;
+
 public:
-    int getColor();
+    int posX, posY;
+    BITMAP *getImage();
     void setColor(int newColor);
     int getState();
     void setState(int newState);
+
     block(int newColor, int newState);
 };
 

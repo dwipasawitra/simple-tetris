@@ -124,38 +124,39 @@
 1356509667 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris-new-class/logic.cpp
 	"logic.h"
 
-1356695502 source:e:\journal\2012a\pbo\fp\simple-tetris\block.cpp
+1357208843 source:e:\journal\2012a\pbo\fp\simple-tetris\block.cpp
 	"block.h"
 
-1356695502 e:\journal\2012a\pbo\fp\simple-tetris\block.h
+1357207931 e:\journal\2012a\pbo\fp\simple-tetris\block.h
 	"main.h"
 
-1356506953 e:\journal\2012a\pbo\fp\simple-tetris\main.h
+1357211735 e:\journal\2012a\pbo\fp\simple-tetris\main.h
 	<allegro.h>
 	<string>
 	<iostream>
 	<cstdio>
 
-1356506269 source:e:\journal\2012a\pbo\fp\simple-tetris\canvas.cpp
+1357209224 source:e:\journal\2012a\pbo\fp\simple-tetris\canvas.cpp
 	"canvas.h"
 
-1356506549 e:\journal\2012a\pbo\fp\simple-tetris\canvas.h
+1357208432 e:\journal\2012a\pbo\fp\simple-tetris\canvas.h
 	"game.h"
 	"block.h"
 
-1356508474 e:\journal\2012a\pbo\fp\simple-tetris\game.h
+1357210504 e:\journal\2012a\pbo\fp\simple-tetris\game.h
 	"highscores.h"
 	"block.h"
 	"canvas.h"
 	"logic.h"
 	"control.h"
 	"main.h"
+	"nextshape.h"
 
 1356354084 e:\journal\2012a\pbo\fp\simple-tetris\highscores.h
 	<stdlib.h>
 	<conio.h>
 
-1356682714 e:\journal\2012a\pbo\fp\simple-tetris\logic.h
+1357152133 e:\journal\2012a\pbo\fp\simple-tetris\logic.h
 	"game.h"
 	"main.h"
 
@@ -167,7 +168,7 @@
 
 1356416212 e:\journal\2012a\pbo\fp\simple-tetris\color.h
 
-1356508646 source:e:\journal\2012a\pbo\fp\simple-tetris\game.cpp
+1357211355 source:e:\journal\2012a\pbo\fp\simple-tetris\game.cpp
 	"game.h"
 	"main.h"
 
@@ -175,14 +176,14 @@
 	<highscores.h>
 	<score.h>
 
-1356509667 source:e:\journal\2012a\pbo\fp\simple-tetris\logic.cpp
+1357207723 source:e:\journal\2012a\pbo\fp\simple-tetris\logic.cpp
 	"logic.h"
 
 1356694085 source:e:\journal\2012a\pbo\fp\simple-tetris\main.cpp
 	"tetris.h"
 	"main.h"
 
-1356358161 e:\journal\2012a\pbo\fp\simple-tetris\tetris.h
+1357203871 e:\journal\2012a\pbo\fp\simple-tetris\tetris.h
 	"main.h"
 	"highscores.h"
 	"game.h"
@@ -190,10 +191,16 @@
 1356353448 source:e:\journal\2012a\pbo\fp\simple-tetris\score.cpp
 	<score.h>
 
-1356697421 source:e:\journal\2012a\pbo\fp\simple-tetris\tetris.cpp
+1357213144 source:e:\journal\2012a\pbo\fp\simple-tetris\tetris.cpp
 	"tetris.h"
 	"main.h"
 
 1356514901 source:e:\journal\2012a\pbo\fp\simple-tetris\control.cpp
 	"control.h"
+
+1357211342 e:\journal\2012a\pbo\fp\simple-tetris\nextshape.h
+	"main.h"
+
+1357211399 source:e:\journal\2012a\pbo\fp\simple-tetris\nextshape.cpp
+	"nextshape.h"
 
