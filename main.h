@@ -11,6 +11,7 @@
  * Surabaya, Indonesia
  */
 
+
 #include <allegro.h>
 #include <string>
 #include <iostream>
@@ -20,12 +21,12 @@
 #define GAME_LOOP_SPEED_NORMAL 200
 #define GAME_LOOP_SPEED_TURBO 100
 #define GAME_CANVAS_START_X 20
-#define GAME_CANVAS_START_Y 0
-#define GAME_CANVAS_BACKGROUND makecol(170, 238, 255)
+#define GAME_CANVAS_START_Y 20
+#define GAME_CANVAS_BACKGROUND makecol(0,0,0)
 #define GAME_STATE_NEWSHAPE_COMEOUT 0
 #define GAME_STATE_NEWSHAPE_FALL 1
 #define GAME_MAX_X 16
-#define GAME_MAX_Y 28
+#define GAME_MAX_Y 26
 
 #define TETRIS_INTERFACE_MENU 0
 #define TETRIS_INTERFACE_GAME 1
@@ -48,6 +49,18 @@
 #define COLOR_BLUE makecol(0,0,255)
 #define COLOR_BLACK makecol(0,0,0)
 
+#define BLOCK_COLOR_BLACK 0
+#define BLOCK_COLOR_RED 1
+#define BLOCK_COLOR_YELLOW 2
+#define BLOCK_COLOR_GREEN 3
+#define BLOCK_COLOR_BLUE 4
+
+#define GAME_NEXTSHAPE_START_X 420
+#define GAME_NEXTSHAPE_START_Y 160
+#define GAME_NEXTSHAPE_WIDTH 160
+#define GAME_NEXTSHAPE_HEIGHT 160
+
+
 
 using namespace std;
 class game;
@@ -55,3 +68,5 @@ class logic;
 class control;
 class canvas;
 class interfacegame;
+
+

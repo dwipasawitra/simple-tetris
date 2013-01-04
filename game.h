@@ -19,6 +19,7 @@
 #include "logic.h"
 #include "control.h"
 #include "main.h"
+#include "nextshape.h"
 
 class game
 {
@@ -26,14 +27,22 @@ friend class control;
 friend class logic;
 friend class canvas;
 protected:
-    block *gameBlock[16][28];
+    FONT* gameFont;
+    BITMAP* background;
+    BITMAP* gameBorder;
+    PALLETE pallete;
+
+    string playerName;
+    block *gameBlock[GAME_MAX_X][GAME_MAX_Y];
     canvas *gameCanvas;
     control *gameControl;
+    nextshape *gameNextShape;
     logic *gameLogic;
     bool gameOver;
     int gameScores;
     void gameLoop();
-    void newScore(string playerName);
+    void newScore();
+    //void printMatrices();
 
 public:
     game();
@@ -42,7 +51,10 @@ public:
 
 class interfaceTetris : public game
 {
+
 public:
+    void initScreen();
+    void requestPlayerName();
     interfaceTetris();
     void newGame();
     void stopGame();

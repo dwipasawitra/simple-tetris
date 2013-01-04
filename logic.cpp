@@ -16,58 +16,59 @@ int logic::get_nextShapeType()
     return this->nextShapeType;
 }
 
-void logic::gameLogicLoop()
+bool logic::gameLogicIteration()
 {
-    while(!gameParent->gameOver)
+    // If KEY_DOWN pressed, then turbo the speed
+    gameParent->gameControl->receiveOnlyTurbo();
+
+    // Step1: newShape from nextShapeType before
+    if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
     {
-        // If KEY_DOWN pressed, then turbo the speed
-        gameParent->gameControl->receiveOnlyTurbo();
+        //cout << "Creating new shape" << endl;
+        this->newShape(nextShapeType);
 
-        // Step1: newShape from nextShapeType before
-        if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
-        {
-            //cout << "Creating new shape" << endl;
-            this->newShape(nextShapeType);
+        this->nextShapeType = rand() % 7;
 
-            this->nextShapeType = rand() % 7;
+        //cout << "Next shape is : " << nextShapeType << endl;
+        this->gameState = GAME_STATE_NEWSHAPE_FALL;
 
-            //cout << "Next shape is : " << nextShapeType << endl;
-            this->gameState = GAME_STATE_NEWSHAPE_FALL;
-
-            //cout << "Game state is GAME_STATE_NEWSHAPE_FALL" << endl;
-
-        }
-        // Step2: Full line deletion
-        //cout << "Destroy line routine" << endl;
-        this->destroyLine();
-
-        //printMatrices();
-
-        // Step3: Collision detector
-        //cout << "Collision detector routine" << endl;
-        if(this->collideDetect())
-        {
-            //cout << "Collision happened" << endl;
-            this->setAllStoned();
-            this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
-        }
-        else
-        {
-            //cout << "Collision didn't happened" << endl;
-
-            // Step4: Get keyboard control command
-            gameParent->gameControl->receiveControl();
-
-            // Step5: Go down, flying thing
-            this->goDown();
-
-            // Step6: Redraw graphic
-            gameParent->gameCanvas->redrawGraphic();
-        }
-        rest(this->gameLoopSpeed);
+        //cout << "Game state is GAME_STATE_NEWSHAPE_FALL" << endl;
 
     }
+    // Step2: Full line deletion
+    //cout << "Destroy line routine" << endl;
+    this->destroyLine();
+
+    //printMatrices();
+
+    // Step3: Collision detector
+    //cout << "Collision detector routine" << endl;
+    if(this->collideDetect())
+    {
+        //cout << "Collision happened" << endl;
+        this->setAllStoned();
+        this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+    }
+    else
+    {
+        //cout << "Collision didn't happened" << endl;
+
+        // Step4: Get keyboard control command
+        gameParent->gameControl->receiveControl();
+        gameParent->gameCanvas->redrawGraphic();
+        //gameParent->printMatrices();
+
+        // Step5: Go down, flying thing
+        this->goDown();
+
+        // Step6: Redraw graphic
+        gameParent->gameCanvas->redrawGraphic();
+    }
+    rest(this->gameLoopSpeed);
+    return false;
+
 }
+
 
 
 void logic::newShape(int newShapeType)
@@ -76,7 +77,7 @@ void logic::newShape(int newShapeType)
     this->newShapeType = newShapeType;
 
     // Get the shape new block color
-    int newBlockColor = makecol(rand() % 255, rand() % 255, rand() % 255);
+    int newBlockColor = rand() % 5;
 
     // Every new shape get 4 block, build the block first
     cout << "Creating 4 new block..." << endl;
@@ -584,43 +585,40 @@ void logic::rotateShape()
         case SHAPE_1A:
             // Block 1A:  Draw (m-1,n)(m,n)(m+1,n)(m+2,n)
             // Rotated to 1B: to (m,n-1)(m,n)(m,n+1)(m,n+2)
-            // MULAI NGODING DARI SINI YAAH
                 this->moveBlock(m-1,n,m,n-1);
                 this->moveBlock(m+1,n,m,n+1);
                 this->moveBlock(m+2,n,m,n+2);
-
+                this->newShapeType = SHAPE_1B;
             break;
         case SHAPE_1B:
             // Block 1B:  Draw (m,n-1)(m,n)(m,n+1)(m,n+2)
+            // Rotated to 1A: to (m-1,n)(m,n)(m+1,n)(m+2,n)
             if(this->m > 0)
             {
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m,n+2,m-1,n+2);
-                this->m--;
+                this->moveBlock(m,n-1,m-1,n);
+                this->moveBlock(m,n+1,m+1,n);
+                this->moveBlock(m,n+2,m+2,n);
+                this->newShapeType = SHAPE_1A;
             }
             break;
         case SHAPE_2A:
             // Block 2A:  Draw (m,n)(m+1,n)(m,n-1)(m+1,n+1)
+            // Rotated to 2B: to (m,n)(m-1,n)(m,n+1)(m+1,n+1)
             if(this->m > 0)
             {
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m+1,n,m,n);
-                this->moveBlock(m+1,n+1,m,n+1);
-                this->m--;
+                this->moveBlock(m+1,n,m-1,n);
+                this->moveBlock(m,n-1,m,n+1);
+                this->newShapeType = SHAPE_2B;
             }
             break;
         case SHAPE_2B:
             // Block 2B:  Draw (m,n)(m-1,n)(m,n+1)(m+1,n+1)
+            // Rotated to 2A: to (m,n)(m+1,n)(m,n-1)(m+1,n+1);
             if(this->m-1 > 0)
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m+1,n+1,m,n+1);
-                this->m--;
+                this->moveBlock(m-1,n,m+1,n);
+                this->moveBlock(m,n+1,m,n-1);
+                this->newShapeType = SHAPE_2A;
             }
             break;
         case SHAPE_3A:
@@ -685,7 +683,8 @@ void logic::clearBlock()
             gameParent->gameBlock[i][j] = NULL;
         }
     }
-    rectfill(screen, 20, 0, 340, 480, makecol(170, 238, 255));
+    //rectfill(screen, 10, 10, 340, 460, GAME_CANVAS_BACKGROUND);
+
     //cout << "All block cleared" << endl;
 }
 
