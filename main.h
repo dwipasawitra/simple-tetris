@@ -39,6 +39,18 @@
 #define SHAPE_3A 4
 #define SHAPE_3B 5
 #define SHAPE_4 6
+#define SHAPE_5A 7
+#define SHAPE_5B 8
+#define SHAPE_5C 9
+#define SHAPE_5D 10
+#define SHAPE_6A 11
+#define SHAPE_6B 12
+#define SHAPE_6C 13
+#define SHAPE_6D 14
+#define SHAPE_7A 15
+#define SHAPE_7B 16
+#define SHAPE_7C 17
+#define SHAPE_7D 18
 
 #define BLOCK_STATE_FLY 0
 #define BLOCK_STATE_STONED 1

@@ -95,7 +95,7 @@ game::game()
 void game::gameLoop()
 {
     // Choose random new shape
-    gameLogic->set_nextShapeType(rand() % 7);
+    gameLogic->set_nextShapeType(rand() % 18);
     //cout << "New Shape Type is " << nextShapeType << endl;
 
     // OK now start the game loop

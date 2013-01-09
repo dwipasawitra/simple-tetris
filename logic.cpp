@@ -27,8 +27,8 @@ bool logic::gameLogicIteration()
         //cout << "Creating new shape" << endl;
         this->newShape(nextShapeType);
 
-        this->nextShapeType = rand() % 7;
-
+        this->nextShapeType = rand() % 18;
+        //this->nextShapeType = SHAPE_7A;
         //cout << "Next shape is : " << nextShapeType << endl;
         this->gameState = GAME_STATE_NEWSHAPE_FALL;
 
@@ -56,13 +56,25 @@ bool logic::gameLogicIteration()
         // Step4: Get keyboard control command
         gameParent->gameControl->receiveControl();
         gameParent->gameCanvas->redrawGraphic();
-        //gameParent->printMatrices();
+         if(this->collideDetect())
+        {
+            //cek kedua
+            this->setAllStoned();
+            this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+        }
+        else
+            {
 
-        // Step5: Go down, flying thing
-        this->goDown();
+           // cout <<"2"<<endl;
+            //gameParent->printMatrices();
 
-        // Step6: Redraw graphic
-        gameParent->gameCanvas->redrawGraphic();
+            // Step5: Go down, flying thing
+            this->goDown();
+
+            // Step6: Redraw graphic
+            gameParent->gameCanvas->redrawGraphic();
+            }
+
     }
     rest(this->gameLoopSpeed);
     return false;
@@ -89,7 +101,7 @@ void logic::newShape(int newShapeType)
     // First move point of new block;
     cout << "m=8, n=0" << endl;
     m = 8;
-    n = 4;
+    n = 0;
 
     // OK, depending on its type, draw a new shape in Block
     switch(newShapeType)
@@ -126,8 +138,8 @@ void logic::newShape(int newShapeType)
             // Block 3A:  Draw (m,n)(m,n+1)(m-1,n)(m-1,n-1)
             gameParent->gameBlock[m][n] = block1;
             gameParent->gameBlock[m][n+1] = block2;
-            gameParent->gameBlock[m-1][n] = block3;
-            gameParent->gameBlock[m-1][n-1] = block4;
+            gameParent->gameBlock[m+1][n] = block3;
+            gameParent->gameBlock[m+1][n-1] = block4;
             break;
         case SHAPE_3B:
             // Block 3B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
@@ -143,6 +155,91 @@ void logic::newShape(int newShapeType)
             gameParent->gameBlock[m+1][n] = block3;
             gameParent->gameBlock[m+1][n+1] = block4;
             break;
+        case SHAPE_5A:
+            // Block 5A: Draw (m,n) (m+1,n) (m-1,n) (m,n+1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m-1][n] = block3;
+            gameParent->gameBlock[m][n+1] = block4;
+            break;
+        case SHAPE_5B:
+            // Block 5B : Draw (m,n) (m+1,n) (m,n+1) (m,n-1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m][n+1] = block3;
+            gameParent->gameBlock[m][n-1] = block4;
+            break;
+        case SHAPE_5C:
+            // Block 5C : Draw (m,n) (m-1,n) (m,n+1) (m,n-1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m-1][n] = block2;
+            gameParent->gameBlock[m][n+1] = block3;
+            gameParent->gameBlock[m][n-1] = block4;
+            break;
+        case SHAPE_5D:
+            //Block 5D : Draw (m,n)(m-1,n) (m+1,n) (m,n-1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m-1][n] = block2;
+            gameParent->gameBlock[m+1][n] = block3;
+            gameParent->gameBlock[m][n-1] = block4;
+            break;
+        case SHAPE_6A:
+            //Block 6A :  Draw (m,n) (m+1,n) (m+2,n) (m,n-1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m+2][n] = block3;
+            gameParent->gameBlock[m][n-1] = block4;
+            break;
+        case SHAPE_6B:
+            //BLOCK 6B : Draw (m,n) (m+1,n) (m,n+1) (m,n+2)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m][n+1] = block3;
+            gameParent->gameBlock[m][n+2] = block4;
+            break;
+        case SHAPE_6C:
+            //BLOCK 6C : Draw (m,n) (m-1,n) (m,n-1) (m,n-2)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m-1][n] = block2;
+            gameParent->gameBlock[m][n-1] = block3;
+            gameParent->gameBlock[m][n-2] = block4;
+            break;
+        case SHAPE_6D:
+            //BLOCK 6D : Draw (m,n) (m-1,n) (m-2,n) (m,n+1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m-1][n] = block2;
+            gameParent->gameBlock[m-2][n] = block3;
+            gameParent->gameBlock[m][n+1] = block4;
+            break;
+        case SHAPE_7A:
+            //BLOCK 7A : Draw (m,n) (m,n-1) (m-1,n) (m-2,n)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m][n-1] = block2;
+            gameParent->gameBlock[m-1][n] = block3;
+            gameParent->gameBlock[m-2][n] = block4;
+            break;
+        case SHAPE_7B:
+            //BLOCK 7B : Draw (m,n) (m-1,n) (m,n+1) (m,n+2)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m-1][n] = block2;
+            gameParent->gameBlock[m][n+1] = block3;
+            gameParent->gameBlock[m][n+2] = block4;
+            break;
+        case SHAPE_7C:
+            //BLOCK 7C : Draw (m,n) (m+1,n) (m,n-1) (m,n-2)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m][n-1] = block3;
+            gameParent->gameBlock[m][n-2] = block4;
+            break;
+        case SHAPE_7D:
+            //BLOCK 7D : Draw (m,n) (m+1,n) (m+2,n) (m,n+1)
+            gameParent->gameBlock[m][n] = block1;
+            gameParent->gameBlock[m+1][n] = block2;
+            gameParent->gameBlock[m+2][n] = block3;
+            gameParent->gameBlock[m][n+2] = block4;
+            break;
+
     }
 
     // My job here is done
@@ -203,8 +300,8 @@ bool logic::collideDetect()
             // Block 3A: Collision checker: (m,n+1)(m-1,n)
             if(gameParent->gameBlock[m][n+2]!=NULL)
                 if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
-            if(gameParent->gameBlock[m-1][n+1]!=NULL)
-                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
             if(this->n+1 == GAME_MAX_Y-1) return true;
             break;
         case SHAPE_3B:
@@ -223,6 +320,114 @@ bool logic::collideDetect()
                 if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
             if(gameParent->gameBlock[m+1][n+2]!=NULL)
                 if(gameParent->gameBlock[m+1][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+1 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_5A:
+            // Block 5A: Collision checker: (m,n+2)(m+1,n+1) (m-1,n+1)
+            if(gameParent->gameBlock[m][n+2]!=NULL)
+                if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+1 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_5B:
+            // Block 5A: Collision checker: (m,n+2)(m+1,n+1)
+            if(gameParent->gameBlock[m][n+2]!=NULL)
+                if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+1 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_5C:
+            // Block 5A: Collision checker: (m,n+2)(m-1,n+1)
+            if(gameParent->gameBlock[m][n+2]!=NULL)
+                if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n-1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+1 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_5D:
+            // Block 5D: Collision checker: (m+1,n+1)(m,n+1) (m-1,n+1)
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m][n+1]!=NULL)
+                if(gameParent->gameBlock[m][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_6A:
+            // Block 6A: Collision checker: (m,n+1)(m+1,n+1) (m+2,n+1)
+            if(gameParent->gameBlock[m][n+1]!=NULL)
+                if(gameParent->gameBlock[m][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+2][n+1]!=NULL)
+                if(gameParent->gameBlock[m+2][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_6B:
+            // Block 6B: Collision checker: (m,n+3)(m+1,n+1)
+            if(gameParent->gameBlock[m][n+3]!=NULL)
+                if(gameParent->gameBlock[m][n+3]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+2 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_6C:
+            // Block 6C: Collision checker: (m-1,n+1)(m,n+1)
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m][n+1]!=NULL)
+                if(gameParent->gameBlock[m][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_6D:
+            // Block 6D: Collision checker: (m,n+2)(m-1,n+1) (m-2,n+1)
+            if(gameParent->gameBlock[m][n+2]!=NULL)
+                if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-2][n+1]!=NULL)
+                if(gameParent->gameBlock[m-2][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+1 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_7A:
+            // Block 7A: Collision checker: (m,n+1)(m-1,n+1) (m-2,n+1)
+            if(gameParent->gameBlock[m][n+1]!=NULL)
+                if(gameParent->gameBlock[m][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-2][n+1]!=NULL)
+                if(gameParent->gameBlock[m-2][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_7B:
+            // Block 7B: Collision checker: (m,n+3)(m-1,n+1)
+            if(gameParent->gameBlock[m][n+3]!=NULL)
+                if(gameParent->gameBlock[m][n+3]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m-1][n+1]!=NULL)
+                if(gameParent->gameBlock[m-1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n+2 == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_7C:
+            // Block 7C: Collision checker: (m,n+1)(m+1,n+1)
+            if(gameParent->gameBlock[m][n+1]!=NULL)
+                if(gameParent->gameBlock[m][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(this->n == GAME_MAX_Y-1) return true;
+            break;
+            case SHAPE_7D:
+            // Block 7D: Collision checker: (m,n+2)(m+1,n+1) (m+2,n+1)
+            if(gameParent->gameBlock[m][n+2]!=NULL)
+                if(gameParent->gameBlock[m][n+2]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+1][n+1]!=NULL)
+                if(gameParent->gameBlock[m+1][n+1]->getState() == BLOCK_STATE_STONED) return true;
+            if(gameParent->gameBlock[m+2][n+1]!=NULL)
+                if(gameParent->gameBlock[m+2][n+1]->getState() == BLOCK_STATE_STONED) return true;
             if(this->n+1 == GAME_MAX_Y-1) return true;
             break;
     }
@@ -275,8 +480,8 @@ void logic::setAllStoned()
             // Block 3A:  Stoned (m,n)(m,n+1)(m-1,n)(m-1,n-1)
             gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
             gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
-            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
-            gameParent->gameBlock[m-1][n-1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n-1]->setState(BLOCK_STATE_STONED);
             break;
         case SHAPE_3B:
             // Block 3B:  Stoned (m,n)(m-1,n)(m,n-1)(m+1,n-1)
@@ -291,6 +496,90 @@ void logic::setAllStoned()
             gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
             gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
             gameParent->gameBlock[m+1][n+1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_5A:
+            // Block 5A: Draw (m,n) (m+1,n) (m-1,n) (m,n+1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_5B:
+            // Block 5B : Draw (m,n) (m+1,n) (m,n+1) (m,n-1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_5C:
+            // Block 5C : Draw (m,n) (m-1,n) (m,n+1) (m,n-1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_5D:
+            //Block 5D : Draw (m,n)(m-1,n) (m+1,n) (m,n-1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_6A:
+            //Block 6A :  Draw (m,n) (m+1,n) (m+2,n) (m,n-1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+2][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_6B:
+            //BLOCK 6B : Draw (m,n) (m+1,n) (m,n+1) (m,n+2)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+2]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_6C:
+            //BLOCK 6C : Draw (m,n) (m-1,n) (m,n-1) (m,n-2)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-2]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_6D:
+            //BLOCK 6D : Draw (m,n) (m-1,n) (m-2,n) (m,n+1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-2][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_7A:
+            //BLOCK 7A : Draw (m,n) (m,n-1) (m-1,n) (m-2,n)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-2][n]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_7B:
+            //BLOCK 7B : Draw (m,n) (m-1,n) (m,n+1) (m,n+2)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m-1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+2]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_7C:
+            //BLOCK 7C : Draw (m,n) (m+1,n) (m,n-1) (m,n-2)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-1]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n-2]->setState(BLOCK_STATE_STONED);
+            break;
+        case SHAPE_7D:
+            //BLOCK 7D : Draw (m,n) (m+1,n) (m+2,n) (m,n+1)
+            gameParent->gameBlock[m][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+1][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m+2][n]->setState(BLOCK_STATE_STONED);
+            gameParent->gameBlock[m][n+2]->setState(BLOCK_STATE_STONED);
             break;
     }
 
@@ -363,8 +652,8 @@ void logic::goDown()
             {
                 this->moveBlock(m,n+1,m,n+2);
                 this->moveBlock(m,n,m, n+1);
-                this->moveBlock(m-1,n,m-1,n+1);
-                this->moveBlock(m-1,n-1,m-1,n);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m+1,n-1,m+1,n);
             }
             break;
         case SHAPE_3B:
@@ -387,6 +676,126 @@ void logic::goDown()
                 this->moveBlock(m+1,n,m+1,n+1);
             }
             break;
+        case SHAPE_5A:
+            // Block 5A:  Draw (m,n+1)(m,n)(m+1,n)(m-1,n)
+            if(this->n+1 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m-1,n,m-1,n+1);
+            }
+            break;
+        case SHAPE_5B:
+            // Block 5B:  Draw (m,n+1)(m,n)(m,n-1)(m+1,n)
+            if(this->n+1 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m+1,n,m+1,n+1);
+            }
+            break;
+        case SHAPE_5C:
+            // Block 5C:  Draw (m,n+1)(m,n)(m,n-1)(m-1,n)
+            if(this->n+1 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m-1,n,m-1,n+1);
+            }
+            break;
+        case SHAPE_5D:
+            // Block 5C:  Draw (m,n)(m,n+1)(m+1,n)(m-1,n)
+            if(this->n < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m-1,n,m-1,n+1);
+            }
+            break;
+        case SHAPE_6A:
+            // Block 6B:  Draw (m,n)(m,n-1)(m+1,n)(m+2,n)
+            if(this->n < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m+2,n,m+2,n+1);
+            }
+            break;
+        case SHAPE_6B:
+            // Block 6B:  Draw (m,n+2)(m,n+1)(m+1,n)(m,n)
+            if(this->n+2 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+2,m,n+3);
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m,n,m,n+1);
+            }
+            break;
+        case SHAPE_6C:
+            // Block 6C:  Draw (m,n)(m,n+1)(m,n+2)(m-1,n)
+            if(this->n < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m,n-2,m,n-1);
+                this->moveBlock(m-1,n,m-1,n+1);
+            }
+            break;
+        case SHAPE_6D:
+            // Block 6D:  Draw (m,n+1)(m,n)(m+1,n)(m+2,n)
+            if(this->n+1 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m-1,n,m-1,n+1);
+                this->moveBlock(m-2,n,m-2,n+1);
+            }
+            break;
+        case SHAPE_7A:
+            // Block 7A:  Draw (m,n)(m,n-1)(m-2,n)(m-1,n)
+            if(this->n < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m-2,n,m-2,n+1);
+                this->moveBlock(m-1,n,m-1,n+1);
+            }
+            break;
+        case SHAPE_7B:
+            // Block 7B:  Draw (m,n+2)(m,n+1)(m-1,n)(m,n)
+            if(this->n+2 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+2,m,n+3);
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m-1,n,m-1,n+1);
+                this->moveBlock(m,n,m,n+1);
+            }
+            break;
+        case SHAPE_7C:
+            // Block 7C:  Draw (m,n)(m,n-1)(m,n-2)(m+1,n)
+            if(this->n < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m,n-1,m,n);
+                this->moveBlock(m,n-2,m,n-1);
+                this->moveBlock(m+1,n,m+1,n+1);
+            }
+            break;
+        case SHAPE_7D:
+            // Block 7D:  Draw (m,n+1)(m,n)(m+1,n)(m+2,n)
+            if(this->n+1 < GAME_MAX_Y - 1)
+            {
+                this->moveBlock(m,n+1,m,n+2);
+                this->moveBlock(m,n,m,n+1);
+                this->moveBlock(m+1,n,m+1,n+1);
+                this->moveBlock(m+2,n,m+2,n+1);
+            }
+            break;
     }
 
     // Don't forget increment also n
@@ -406,77 +815,266 @@ void logic::moveLeft()
             // Block 1A:  Draw (m-1,n)(m,n)(m+1,n)(m+2,n)
             if(this->m-1 > 0)
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m+1,n,m,n);
-                this->moveBlock(m+2,n,m+1,n);
-                this->m--;
+                if(gameParent->gameBlock[m-2][n]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+2,n,m+1,n);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_1B:
             // Block 1B:  Draw (m,n-1)(m,n)(m,n+1)(m,n+2)
             if(this->m > 0)
             {
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m,n+2,m-1,n+2);
-                this->m--;
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m-1][n+2]==NULL)
+                {
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->moveBlock(m,n+2,m-1,n+2);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_2A:
             // Block 2A:  Draw (m,n)(m+1,n)(m,n-1)(m+1,n+1)
             if(this->m > 0)
             {
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m+1,n,m,n);
-                this->moveBlock(m+1,n+1,m,n+1);
-                this->m--;
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL && gameParent->gameBlock[m][n+1]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+1,n+1,m,n+1);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_2B:
             // Block 2B:  Draw (m,n)(m-1,n)(m,n+1)(m+1,n+1)
             if(this->m-1 > 0)
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m+1,n+1,m,n+1);
-                this->m--;
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->moveBlock(m+1,n+1,m,n+1);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_3A:
             // Block 3A:  Draw (m,n)(m,n+1)(m-1,n)(m-1,n-1)
             if(this->m-1 > 0)
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m-1,n-1,m-2,n-1);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m,n,m-1,n);
-                this->m--;
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m][n-1]==NULL)
+                {
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+1,n-1,m,n-1);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_3B:
             // Block 3B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
             if(this->m-1 > 0)
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m+1,n-1,m,n-1);
-                this->m--;
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL )
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->moveBlock(m+1,n-1,m,n-1);
+                    this->m--;
+                }
             }
             break;
         case SHAPE_4:
             // Block 4:  Draw (m,n)(m,n+1)(m+1,n)(m+1,n+1)
             if(this->m > 0)
             {
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m+1,n,m,n);
-                this->moveBlock(m+1,n+1,m,n+1);
-                this->m--;
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+1,n+1,m,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_5A:
+            // Block 5A:  Draw (m-1,n)(m,n)(m+1,n)(m,n+1)
+            if(this->m-1> 0)
+            {
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_5B:
+            // Block 5B:  Draw (m,n)(m+1,n)(m,n-1)(m,n+1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m-1][n-1]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_5C:
+            // Block 5C:  Draw (m-1,n)(m,n)(m,n-1)(m,n+1)
+            if(this->m-1 > 0)
+            {
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m-1][n-1]==NULL && gameParent->gameBlock[m-1][n+2]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_5D:
+            // Block 5D:  Draw (m-1,n)(m,n)(m+1,n)(m,n-1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_6A:
+            // Block 6A:  Draw (m,n)(m+1,n)(m+2,n)(m,n+1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+2,n,m+1,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_6B:
+            // Block 6A:  Draw (m,n)(m+1,n)(m,n+2)(m,n+1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m-1][n+2]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m,n+2,m-1,n+2);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_6C:
+            // Block 6C:  Draw (m-1,n)(m,n)(m,n-2)(m,n-1)
+            if(this->m-1 > 0)
+            {
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL && gameParent->gameBlock[m-1][n-2]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n-2,m-1,n-2);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_6D:
+            // Block 6D:  Draw (m-2,n)(m-1,n)(m,n)(m,n+1)
+            if(this->m-2 > 0)
+            {
+                if(gameParent->gameBlock[m-3][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL )
+                {
+                    this->moveBlock(m-2,n,m-3,n);
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_7A:
+            // Block 6A:  Draw (m-2,n)(m-1,n)(m,n)(m,n+1)
+            if(this->m-2 > 0)
+            {
+                if(gameParent->gameBlock[m-3][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL)
+                {
+                    this->moveBlock(m-2,n,m-3,n);
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_7B:
+            // Block 7B:  Draw (m-1,n)(m,n)(m,n+2)(m,n+1)
+            if(this->m-1 > 0)
+            {
+                if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m-1][n+2]==NULL)
+                {
+                    this->moveBlock(m-1,n,m-2,n);
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m,n+2,m-1,n+2);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_7C:
+            // Block 7C:  Draw (m,n)(m-1,n)(m,n-2)(m,n-1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n-1]==NULL && gameParent->gameBlock[m-1][n-2]==NULL)
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m,n-2,m-1,n-2);
+                    this->moveBlock(m,n-1,m-1,n-1);
+                    this->m--;
+                }
+            }
+            break;
+        case SHAPE_7D:
+            // Block 7D:  Draw (m,n)(m+1,n)(m+2,n)(m,n+1)
+            if(this->m > 0)
+            {
+                if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m-1][n+1]==NULL )
+                {
+                    this->moveBlock(m,n,m-1,n);
+                    this->moveBlock(m+1,n,m,n);
+                    this->moveBlock(m+2,n,m+1,n);
+                    this->moveBlock(m,n+1,m-1,n+1);
+                    this->m--;
+                }
             }
             break;
     }
@@ -495,77 +1093,266 @@ void logic::moveRight()
             // Block 1A:  Draw (m-1,n)(m,n)(m+1,n)(m+2,n)
             if(this->m+2 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m+2,n,m+3,n);
-                this->moveBlock(m+1,n,m+2,n);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m-1,n,m,n);
-                m++;
+                if(gameParent->gameBlock[m+3][n]==NULL)
+                {
+                    this->moveBlock(m+2,n,m+3,n);
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    m++;
+                }
             }
             break;
         case SHAPE_1B:
             // Block 1B:  Draw (m,n-1)(m,n)(m,n+1)(m,n+2)
             if(this->m < GAME_MAX_X - 1)
             {
-                this->moveBlock(m,n-1,m+1,n-1);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m,n+1,m+1,n+1);
-                this->moveBlock(m,n+2,m+1,n+2);
-                this->m++;
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n-1]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+1][n+2]==NULL)
+                {
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->moveBlock(m,n+2,m+1,n+2);
+                    this->m++;
+                }
             }
             break;
         case SHAPE_2A:
             // Block 2A:  Draw (m,n)(m+1,n)(m,n-1)(m+1,n+1)
             if(this->m+1 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m+1,n,m+2,n);
-                this->moveBlock(m+1,n+1,m+2,n+1);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m,n-1,m+1,n-1);
-                this->m++;
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+2][n+1]==NULL && gameParent->gameBlock[m+1][n-1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m+1,n+1,m+2,n+1);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->m++;
+                }
             }
             break;
         case SHAPE_2B:
             // Block 2B:  Draw (m,n)(m-1,n)(m,n+1)(m+1,n+1)
             if(this->m+1 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m+1,n+1,m+2,n+1);
-                this->moveBlock(m,n+1,m+1,n+1);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m-1,n,m,n);
-                this->m++;
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n+1,m+2,n+1);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->m++;
+                }
             }
             break;
         case SHAPE_3A:
             // Block 3A:  Draw (m,n)(m,n+1)(m-1,n)(m-1,n-1)
-            if(this->m < GAME_MAX_X - 1)
+            if(this->m+1 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m,n+1,m+1,n+1);
-                this->moveBlock(m-1,n,m,n);
-                this->moveBlock(m-1,n-1,m,n-1);
-                this->m++;
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+2][n-1]==NULL && gameParent->gameBlock[m+1][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n-1,m+2,n-1);
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->m++;
+                }
             }
             break;
         case SHAPE_3B:
             // Block 3B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
             if(this->m+1 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m+1,n-1,m+2,n-1);
-                this->moveBlock(m,n-1,m+1,n-1);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m-1,n,m,n);
-                this->m++;
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+2][n-1]==NULL)
+                {
+                    this->moveBlock(m+1,n-1,m+2,n-1);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->m++;
+                }
             }
             break;
         case SHAPE_4:
             // Block 4:  Draw (m,n)(m,n+1)(m+1,n)(m+1,n+1)
             if(this->m+1 < GAME_MAX_X - 1)
             {
-                this->moveBlock(m+1,n,m+2,n);
-                this->moveBlock(m+1,n+1,m+2,n+1);
-                this->moveBlock(m,n,m+1,n);
-                this->moveBlock(m,n+1,m+1,n+1);
-                this->m++;
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m+1,n+1,m+2,n+1);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->m++;
+                }
+            }
+            break;
+        case SHAPE_5A:
+            // Block 5A:  Draw (m+1,n)(m,n)(m-1,n)(m,n+1)
+            if(this->m+1 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_5B:
+            // Block 5B:  Draw (m+1,n)(m,n)(m,n-1)(m,n+1)
+            if(this->m+1 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+1][n-1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_5C:
+            // Block 5C:  Draw (m,n)(m-1,n)(m,n-1)(m,n+1)
+            if(this->m < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+1][n-1]==NULL)
+                {
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_5D:
+            // Block 5D:  Draw (m+1,n)(m,n)(m-1,n)(m,n-1)
+            if(this->m+1 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n-1]==NULL )
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_6A:
+            // Block 6A:  Draw (m+2,n)(m+1,n)(m,n)(m,n-1)
+            if(this->m+2 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+3][n]==NULL && gameParent->gameBlock[m+1][n-1]==NULL )
+                {
+                    this->moveBlock(m+2,n,m+3,n);
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_6B:
+            // Block 6A:  Draw (m+1,n)(m,n)(m,n+1)(m,n+2)
+            if(this->m+1 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->moveBlock(m,n+2,m+1,n+2);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_6C:
+            // Block 6C:  Draw (m,n)(m-1,n)(m,n+1)(m,n+2)
+            if(this->m < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n-2,m+1,n-2);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_6D:
+            // Block 6D:  Draw (m,n)(m-1,n)(m-2,n)(m,n+1)
+            if(this->m < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL)
+                {
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m-2,n,m-1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_7A:
+            // Block 7A:  Draw (m,n)(m-1,n)(m-2,n)(m,n-1)
+            if(this->m < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n-1]==NULL )
+                {
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m-2,n,m-1,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_7B:
+            // Block 7B:  Draw (m,n)(m-1,n)(m,n+1)(m,n+2)
+            if(this->m < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m-1,n,m,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    this->moveBlock(m,n+2,m+1,n+2);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_7C:
+            // Block 7C:  Draw (m+1,n)(m,n)(m,n+1)(m,n+2)
+            if(this->m+2 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                {
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n-1,m+1,n-1);
+                    this->moveBlock(m,n-2,m+1,n-2);
+                    m++;
+                }
+            }
+            break;
+        case SHAPE_7D:
+            // Block 7D:  Draw (m+2,n)(m+1,n)(m,n)(m,n+1)
+            if(this->m+2 < GAME_MAX_X - 1)
+            {
+                if(gameParent->gameBlock[m+3][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL)
+                {
+                    this->moveBlock(m+2,n,m+3,n);
+                    this->moveBlock(m+1,n,m+2,n);
+                    this->moveBlock(m,n,m+1,n);
+                    this->moveBlock(m,n+1,m+1,n+1);
+                    m++;
+                }
             }
             break;
     }
@@ -585,15 +1372,18 @@ void logic::rotateShape()
         case SHAPE_1A:
             // Block 1A:  Draw (m-1,n)(m,n)(m+1,n)(m+2,n)
             // Rotated to 1B: to (m,n-1)(m,n)(m,n+1)(m,n+2)
+            if(gameParent->gameBlock[m][n+2]==NULL && gameParent->gameBlock[m][n+1]==NULL && gameParent->gameBlock[m][n-1]==NULL)
+            {
                 this->moveBlock(m-1,n,m,n-1);
                 this->moveBlock(m+1,n,m,n+1);
                 this->moveBlock(m+2,n,m,n+2);
                 this->newShapeType = SHAPE_1B;
+            }
             break;
         case SHAPE_1B:
             // Block 1B:  Draw (m,n-1)(m,n)(m,n+1)(m,n+2)
             // Rotated to 1A: to (m-1,n)(m,n)(m+1,n)(m+2,n)
-            if(this->m > 0)
+            if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m-1][n]==NULL)
             {
                 this->moveBlock(m,n-1,m-1,n);
                 this->moveBlock(m,n+1,m+1,n);
@@ -604,46 +1394,46 @@ void logic::rotateShape()
         case SHAPE_2A:
             // Block 2A:  Draw (m,n)(m+1,n)(m,n-1)(m+1,n+1)
             // Rotated to 2B: to (m,n)(m-1,n)(m,n+1)(m+1,n+1)
-            if(this->m > 0)
+            if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL )
             {
-                this->moveBlock(m+1,n,m-1,n);
-                this->moveBlock(m,n-1,m,n+1);
-                this->newShapeType = SHAPE_2B;
+                this->moveBlock(m,n-1,m-1,n);
+                this->moveBlock(m+1,n,m,n-1);
+                this->moveBlock(m+1,n+1,m+1,n-1);
+                this->newShapeType = SHAPE_3B;
             }
             break;
         case SHAPE_2B:
             // Block 2B:  Draw (m,n)(m-1,n)(m,n+1)(m+1,n+1)
             // Rotated to 2A: to (m,n)(m+1,n)(m,n-1)(m+1,n+1);
-            if(this->m-1 > 0)
+            if(gameParent->gameBlock[m-1][n+1]==NULL && gameParent->gameBlock[m][n-1]==NULL )
             {
-                this->moveBlock(m-1,n,m+1,n);
-                this->moveBlock(m,n+1,m,n-1);
-                this->newShapeType = SHAPE_2A;
+                this->moveBlock(m+1,n+1,m+1,n-1);
+                this->moveBlock(m,n+1,m+1,n);
+                this->moveBlock(m-1,n,m,n+1);
+                this->newShapeType = SHAPE_3A;
             }
             break;
         case SHAPE_3A:
             // Block 3A:  Draw (m,n)(m,n+1)(m-1,n)(m-1,n-1)
-            if(this->m-1 > 0)
+            if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL )
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m-1,n-1,m-2,n-1);
-                this->moveBlock(m,n+1,m-1,n+1);
-                this->moveBlock(m,n,m-1,n);
-                this->m--;
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m+1,n-1,m+1,n+1);
+                this->newShapeType = SHAPE_2B;
             }
             break;
         case SHAPE_3B:
             // Block 3B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
-            if(this->m-1 > 0)
+            if(gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m][n+1]==NULL )
             {
-                this->moveBlock(m-1,n,m-2,n);
-                this->moveBlock(m,n,m-1,n);
-                this->moveBlock(m,n-1,m-1,n-1);
-                this->moveBlock(m+1,n-1,m,n-1);
-                this->m--;
+                this->moveBlock(m+1,n-1,m+1,n+1);
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m-1,n,m,n-1);
+                this->newShapeType = SHAPE_2A;
             }
             break;
-        case SHAPE_4:
+        /*case SHAPE_4:
             // Block 4:  Draw (m,n)(m,n+1)(m+1,n)(m+1,n+1)
             if(this->m > 0)
             {
@@ -652,8 +1442,129 @@ void logic::rotateShape()
                 this->moveBlock(m+1,n,m,n);
                 this->moveBlock(m+1,n+1,m,n+1);
                 this->m--;
+            }*/
+            break;
+        case SHAPE_5A:
+            // Block 5A:  Draw (m+1,n)(m,n+1)(m-1,n)
+            if(gameParent->gameBlock[m][n-1]==NULL)
+            {
+                this->moveBlock(m-1,n,m,n-1);
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m+1,n,m,n+1);
+                this->newShapeType = SHAPE_5C;
             }
             break;
+        case SHAPE_5B:
+            // Block 5B:  Draw (m,n-1)(m+1,n)(m,n+1)
+            if(gameParent->gameBlock[m-1][n]==NULL)
+            {
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m,n-1,m+1,n);
+                this->newShapeType = SHAPE_5A;
+            }
+            break;
+        case SHAPE_5C:
+            // Block 5c:  Draw (m,n+1)(m-1,n)(m,n-1)
+            if(gameParent->gameBlock[m+1][n]==NULL)
+            {
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m-1,n,m,n-1);
+                this->moveBlock(m,n+1,m-1,n);
+                this->newShapeType = SHAPE_5D;
+            }
+            break;
+        case SHAPE_5D:
+            // Block 5D:  Draw (m-1,n)(m,n-1)(m+1,n)
+            if(gameParent->gameBlock[m][n+1]==NULL)
+            {
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m-1,n,m,n-1);
+                this->newShapeType = SHAPE_5B;
+            }
+            break;
+        case SHAPE_6A:
+            // Block 6A:  Draw (m,n-1)(m+1,n)(m+2,n)
+            if(gameParent->gameBlock[m][n+1]==NULL && gameParent->gameBlock[m][n+2]==NULL)
+            {
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m+2,n,m,n+2);
+                this->moveBlock(m,n-1,m+1,n);
+                this->newShapeType = SHAPE_6B;
+            }
+            break;
+        case SHAPE_6B:
+            // Block 6B:  Draw (m+1,n)(m,n+1)(m,n+2)
+            if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m-1][n]==NULL)
+            {
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m,n+2,m-2,n);
+                this->moveBlock(m+1,n,m,n+1);
+                this->newShapeType = SHAPE_6D;
+            }
+            break;
+        case SHAPE_6C:
+            // Block 6C:  Draw (m-1,n)(m,n-1)(m,n-2)
+            if(gameParent->gameBlock[m+1][n]==NULL && gameParent->gameBlock[m+2][n]==NULL)
+            {
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m,n-2,m+2,n);
+                this->moveBlock(m-1,n,m,n-1);
+                this->newShapeType = SHAPE_6A;
+            }
+            break;
+        case SHAPE_6D:
+            // Block 6D:  Draw (m,n+1)(m-1,n)(m-2,n)
+            if(gameParent->gameBlock[m][n-1]==NULL && gameParent->gameBlock[m][n-2]==NULL)
+            {
+                this->moveBlock(m-1,n,m,n-1);
+                this->moveBlock(m-2,n,m,n-2);
+                this->moveBlock(m,n+1,m-1,n);
+                this->newShapeType = SHAPE_6C;
+            }
+            break;
+        case SHAPE_7A:
+            // Block 6A:  Draw (m,n-1)(m-1,n)(m-2,n)
+            if(gameParent->gameBlock[m][n-2]==NULL && gameParent->gameBlock[m+1][n]==NULL)
+            {
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m-1,n,m,n-1);
+                this->moveBlock(m-2,n,m,n-2);
+                this->newShapeType = SHAPE_7C;
+            }
+            break;
+        case SHAPE_7B:
+            // Block 7B:  Draw (m-1,n)(m,n+1)(m,n+2)
+            if(gameParent->gameBlock[m-2][n]==NULL && gameParent->gameBlock[m][n-1]==NULL)
+            {
+                this->moveBlock(m-1,n,m,n-1);
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m,n+2,m-2,n);
+                this->newShapeType = SHAPE_7A;
+            }
+            break;
+        case SHAPE_7C:
+            // Block 7C:  Draw (m+1,n)(m,n-1)(m,n-2)
+            if(gameParent->gameBlock[m][n+1]==NULL && gameParent->gameBlock[m+2][n]==NULL)
+            {
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m,n-1,m+1,n);
+                this->moveBlock(m,n-2,m+2,n);
+                this->newShapeType = SHAPE_7D;
+            }
+            break;
+        case SHAPE_7D:
+            // Block 7D:  Draw (m,n+1)(m+1,n)(m+2,n)
+            if(gameParent->gameBlock[m-1][n]==NULL && gameParent->gameBlock[m][n+2]==NULL)
+            {
+                this->moveBlock(m,n+1,m-1,n);
+                this->moveBlock(m+1,n,m,n+1);
+                this->moveBlock(m+2,n,m,n+2);
+                this->newShapeType = SHAPE_7B;
+            }
+            break;
+
     }
 
 }
