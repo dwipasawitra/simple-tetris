@@ -1,13 +1,13 @@
-#include <stdlib>
-#include <conio>
-using namespace std;
+#include "main.h"
 
 class score
 {
-      public:
-             getnama(string);
-             getscore(int);
-             void getnama();
-             void getscore();
-             
-{;
+private:
+    BITMAP *scoreBorder;
+    int gameScores;
+public:
+    void incScores(int increment);
+    void setScores(int newScore);
+    void clearScores();
+    void redrawScores();
+};

@@ -27,28 +27,35 @@ friend class control;
 friend class logic;
 friend class canvas;
 protected:
-    FONT* gameFont;
+    // Allegro Element
+    FONT* gameFontBig;
     BITMAP* background;
     BITMAP* gameBorder;
+    BITMAP* newPlayerPopup;
     PALLETE pallete;
 
-    string playerName;
+    // Game Element
     block *gameBlock[GAME_MAX_X][GAME_MAX_Y];
     canvas *gameCanvas;
     control *gameControl;
     nextshape *gameNextShape;
     logic *gameLogic;
+
+    // Game variabel
+    string playerName;
     bool gameOver;
-    int gameScores;
+
+    // Game Element method
     void gameLoop();
     void newScore();
-    //void printMatrices();
+    void redrawBackground();
 
 public:
     game();
     ~game();
 };
 
+// interfaceTetris class: Abstracting Game Interface Element System with User
 class interfaceTetris : public game
 {
 

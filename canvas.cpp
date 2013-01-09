@@ -3,6 +3,7 @@
 canvas::canvas(game *gameParent)
 {
     this->gameParent = gameParent;
+    this->gameBorder = load_bitmap("border.bmp", NULL);
 }
 
 void canvas::redrawGraphic()
@@ -143,3 +144,9 @@ bool canvas::checkPoint(int x, int y)
 }
 */
 
+void canvas::redrawBorder()
+{
+
+    blit(gameBorder, screen, 0, 0, 10, 10, 340, 460);
+    blit(gameParent->background, screen, 20, 20, 20, 20, 320, 440);
+}

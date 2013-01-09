@@ -43,16 +43,63 @@ interfaceTetris::interfaceTetris()
             this->gameBlock[i][j] = NULL;
 }
 
+void interfaceTetris::requestPlayerName()
+{
+    const int playerNameSize = 50;
+    char input[playerNameSize], n;
+
+    // Draw popup window in front of games
+    blit(this->newPlayerPopup, screen, 0, 0, 53.5 , 115, 533, 250);
+
+    // START KEYCODE READER -- SRC: http://www.gamedev.net/page/resources/_/technical/game-programming/text-input-in-an-allegro-game-r2130 //
+    readkey();
+    do
+    {
+      if(keypressed())
+      {
+         int  newkey   = readkey();
+         char ASCII    = newkey & 0xff;
+         char scancode = newkey >> 8;
+
+         /* a character key was pressed; add it to the string */
+         if(ASCII >= 32 && ASCII <= 126)
+         {
+                                if(n < playerNameSize - 1)
+                                {
+                                        input[n] = ASCII;
+                                        n++;
+                                        input[n] = '\0';
+                                }
+         }
+         else if(scancode == KEY_BACKSPACE)
+         {
+            if (n > 0) n--;
+            input[n] = '\0';
+         }
+      }
+       /* all drawing goes here */
+
+      textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, 0);
+
+    }
+    while(!key[KEY_ENTER]);
+
+    // END KEYCODE READER //
+
+    // Set player name
+    this->playerName = string(input);
+
+    // Restore game interface
+    this->initScreen();
+}
+
 void interfaceTetris::initScreen()
 {
     // Display Background
-    this->background = load_bitmap("background.pcx", NULL);
-    blit(background, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    this->redrawBackground();
 
-    // Set game border
-    this->gameBorder = load_bitmap("border.bmp", NULL);
-    blit(gameBorder, screen, 0, 0, 10, 10, 340, 460);
-    blit(background, screen, 20, 20, 20, 20, 320, 440);
+    // Draw game Canvas
+    this->gameCanvas->redrawBorder();
 
     // Display Next Shape
     this->gameNextShape->redrawNextShape();
@@ -71,11 +118,13 @@ void interfaceTetris::newGame()
     //cout << "Set gamestate to GAME_STATE_NEWSHAPE_COMEMOUT" << endl;
     this->gameLogic->resetState();
 
+    // Input player name
+    this->requestPlayerName();
+
     // Wait for user to press ENTER
     while(!key[KEY_ENTER]);
 
     // OK, game loop starter until you are game over
-    //cout << "Starting Game loop.." << endl;
     this->gameLoop();
 }
 void interfaceTetris::stopGame()
@@ -90,20 +139,29 @@ game::game()
     this->gameControl = new control(this);
     this->gameLogic = new logic(this);
     this->gameNextShape = new nextshape();
+
+    // Get some image
+    this->background = load_bitmap("background.pcx", NULL);
+    this->newPlayerPopup = load_bitmap("player_name.bmp", NULL);
+    this->gameFontBig = load_font("font.pcx", this->pallete, NULL);
 }
 
 void game::gameLoop()
 {
     // Choose random new shape
     gameLogic->set_nextShapeType(rand() % 7);
+    gameLogic->set_nextShapeColor(rand() % 5);
     //cout << "New Shape Type is " << nextShapeType << endl;
 
     // OK now start the game loop
     //cout << "[GAME LOOP STARTED]" << endl;
+
     while(!gameOver)
     {
         // Draw next shape type
 
+        this->gameNextShape->setNextShapeType(this->gameLogic->get_nextShapeType(), this->gameLogic->get_nextShapeColor());
+        this->gameNextShape->redrawNextShape();
         // Draw score board
 
 
@@ -126,5 +184,7 @@ void game::newScore()
 }
 
 
-
-
+void game::redrawBackground()
+{
+    blit(background, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+}

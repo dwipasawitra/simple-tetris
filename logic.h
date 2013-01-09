@@ -15,7 +15,9 @@ private:
     int gameLoopSpeed;
     int m, n;  // Track new shape
     int newShapeType;
+    int newShapeColor;
     int nextShapeType;
+    int nextShapeColor;
 
     /* Block matrix control */
 
@@ -29,8 +31,13 @@ private:
 
 public:
     bool gameLogicIteration();
+
     int get_nextShapeType();
     void set_nextShapeType(int nextShapeType);
+
+    int get_nextShapeColor();
+    void set_nextShapeColor(int newShapeColor);
+
     void rotateShape();
     void moveLeft();
     void moveRight();

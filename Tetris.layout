@@ -1,89 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="main.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="957" topLine="1" />
-		</Cursor>
+	<File name="block.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="417" topLine="0" />
 	</File>
-	<File name="tetris.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1280" topLine="7" />
-		</Cursor>
+	<File name="block.h" open="0" top="0" tabpos="2">
+		<Cursor position="477" topLine="0" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="215" topLine="0" />
-		</Cursor>
+	<File name="canvas.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2748" topLine="104" />
 	</File>
-	<File name="tetris.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="562" topLine="5" />
-		</Cursor>
+	<File name="canvas.h" open="1" top="0" tabpos="4">
+		<Cursor position="367" topLine="0" />
 	</File>
-	<File name="block.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="684" topLine="27" />
-		</Cursor>
+	<File name="control.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="logic.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="52" topLine="0" />
-		</Cursor>
+	<File name="control.h" open="0" top="0" tabpos="4">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="canvas.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1058" topLine="30" />
-		</Cursor>
+	<File name="game.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="512" topLine="78" />
 	</File>
-	<File name="canvas.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="226" topLine="0" />
-		</Cursor>
+	<File name="game.h" open="1" top="0" tabpos="6">
+		<Cursor position="639" topLine="19" />
 	</File>
-	<File name="game.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="626" topLine="15" />
-		</Cursor>
+	<File name="highscores.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="control.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="168" topLine="0" />
-		</Cursor>
+	<File name="logic.cpp" open="1" top="1" tabpos="7">
+		<Cursor position="24776" topLine="642" />
 	</File>
-	<File name="logic.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="24496" topLine="656" />
-		</Cursor>
+	<File name="logic.h" open="0" top="0" tabpos="3">
+		<Cursor position="723" topLine="7" />
 	</File>
-	<File name="block.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="543" topLine="25" />
-		</Cursor>
+	<File name="main.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="control.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="253" topLine="0" />
-		</Cursor>
+	<File name="main.h" open="0" top="0" tabpos="1">
+		<Cursor position="1190" topLine="31" />
 	</File>
-	<File name="game.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="652" topLine="0" />
-		</Cursor>
+	<File name="nextshape.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="480" topLine="0" />
 	</File>
-	<File name="nextshape.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
+	<File name="nextshape.h" open="0" top="0" tabpos="7">
+		<Cursor position="352" topLine="0" />
 	</File>
-	<File name="nextshape.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
+	<File name="score.h" open="1" top="0" tabpos="1">
+		<Cursor position="219" topLine="0" />
 	</File>
-	<File name="highscores.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
+	<File name="tetris.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1084" topLine="21" />
+	</File>
+	<File name="tetris.h" open="0" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

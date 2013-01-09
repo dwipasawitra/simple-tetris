@@ -16,6 +16,16 @@ int logic::get_nextShapeType()
     return this->nextShapeType;
 }
 
+void logic::set_nextShapeColor(int nextShapeColor)
+{
+    this->nextShapeColor = nextShapeColor;
+}
+
+int logic::get_nextShapeColor()
+{
+    return this->nextShapeColor;
+}
+
 bool logic::gameLogicIteration()
 {
     // If KEY_DOWN pressed, then turbo the speed
@@ -77,14 +87,15 @@ void logic::newShape(int newShapeType)
     this->newShapeType = newShapeType;
 
     // Get the shape new block color
-    int newBlockColor = rand() % 5;
+    this->newShapeColor = this->nextShapeColor;
+    this->nextShapeColor = rand() % 5;
 
     // Every new shape get 4 block, build the block first
     cout << "Creating 4 new block..." << endl;
-    block *block1 = new block(newBlockColor, BLOCK_STATE_FLY);
-    block *block2 = new block(newBlockColor, BLOCK_STATE_FLY);
-    block *block3 = new block(newBlockColor, BLOCK_STATE_FLY);
-    block *block4 = new block(newBlockColor, BLOCK_STATE_FLY);
+    block *block1 = new block(newShapeColor, BLOCK_STATE_FLY);
+    block *block2 = new block(newShapeColor, BLOCK_STATE_FLY);
+    block *block3 = new block(newShapeColor, BLOCK_STATE_FLY);
+    block *block4 = new block(newShapeColor, BLOCK_STATE_FLY);
 
     // First move point of new block;
     cout << "m=8, n=0" << endl;
