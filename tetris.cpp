@@ -13,8 +13,6 @@
 #include "tetris.h"
 #include "main.h"
 
-// Game font definition
-
 
 void tetris::initWindow()
 {
@@ -24,6 +22,14 @@ void tetris::initWindow()
     install_keyboard();     // Install keyboard driver
     install_timer();        // Install timer driver
     set_color_depth(desktop_color_depth());
+
+    // Install sound driver
+    if (install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL) != 0) {
+        allegro_message("Error initializing sound system\n%s\n", allegro_error);
+
+
+    }
+
 
     /* Game Font Experiment */
     gameFont = load_font("font.pcx", pallete, NULL);
@@ -66,6 +72,7 @@ void tetris::start()       // Start game method
 
     // Init interfacetetris class
     gameIface = new interfaceTetris();
+    hsIface = new interfaceHighScore();
 
     // Open a window depending the state
     while(1)
@@ -132,7 +139,9 @@ void tetris::tetrisInterface() // Open Tetris interface
 
 void tetris::highScores()  // Open highscore interface
 {
+    this->clearWindow();
 
+    hsIface->displayHighScore();
 }
 
 tetris::tetris(int startInterface)

@@ -20,6 +20,8 @@
 #include "control.h"
 #include "main.h"
 #include "nextshape.h"
+#include "music.h"
+#include "score.h"
 
 class game
 {
@@ -40,6 +42,8 @@ protected:
     control *gameControl;
     nextshape *gameNextShape;
     logic *gameLogic;
+    music *gameMusic;
+    score *gameScore;
 
     // Game variabel
     string playerName;
@@ -47,7 +51,7 @@ protected:
 
     // Game Element method
     void gameLoop();
-    void newScore();
+    void newScore(string playerName);
     void redrawBackground();
 
 public:

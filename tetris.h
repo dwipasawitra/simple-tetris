@@ -18,14 +18,13 @@
 
 
 
-
-
 class tetris
 {
 private:
     int interfaceState;
     //highscores *scoresData;
     interfaceTetris *gameIface;
+    interfaceHighScore *hsIface;
     FONT *gameFont;
     PALLETE pallete;
 

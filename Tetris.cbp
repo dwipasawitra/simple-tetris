@@ -38,6 +38,8 @@
 		<Unit filename="logic.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
+		<Unit filename="music.cpp" />
+		<Unit filename="music.h" />
 		<Unit filename="nextshape.cpp" />
 		<Unit filename="nextshape.h" />
 		<Unit filename="score.cpp" />

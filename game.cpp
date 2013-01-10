@@ -47,6 +47,7 @@ void interfaceTetris::requestPlayerName()
 {
     const int playerNameSize = 50;
     char input[playerNameSize], n;
+    string input_str;
 
     // Draw popup window in front of games
     blit(this->newPlayerPopup, screen, 0, 0, 53.5 , 115, 533, 250);
@@ -86,8 +87,9 @@ void interfaceTetris::requestPlayerName()
 
     // END KEYCODE READER //
 
-    // Set player name
-    this->playerName = string(input);
+    // Set new score
+    input_str = string(input);
+    this->newScore(input_str);
 
     // Restore game interface
     this->initScreen();
@@ -124,6 +126,9 @@ void interfaceTetris::newGame()
     // Wait for user to press ENTER
     while(!key[KEY_ENTER]);
 
+    // Play the music
+    this->gameMusic->playMusic(MUSIC_NUM_1);
+
     // OK, game loop starter until you are game over
     this->gameLoop();
 }
@@ -139,6 +144,7 @@ game::game()
     this->gameControl = new control(this);
     this->gameLogic = new logic(this);
     this->gameNextShape = new nextshape();
+    this->gameMusic = new music();
 
     // Get some image
     this->background = load_bitmap("background.pcx", NULL);
@@ -149,7 +155,7 @@ game::game()
 void game::gameLoop()
 {
     // Choose random new shape
-    gameLogic->set_nextShapeType(rand() % 7);
+    gameLogic->set_nextShapeType(rand() % 18);
     gameLogic->set_nextShapeColor(rand() % 5);
     //cout << "New Shape Type is " << nextShapeType << endl;
 
@@ -178,8 +184,18 @@ void game::gameLoop()
 }
 
 
-void game::newScore()
+void game::newScore(string playerName)
 {
+    // Remove previous score
+    if(this->gameScore != NULL)
+    {
+        delete this->gameScore;
+    }
+
+    // Create new score instantiation.
+    this->gameScore = new score(playerName);
+
+    // Done
 
 }
 

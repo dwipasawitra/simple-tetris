@@ -35,9 +35,11 @@ bool logic::gameLogicIteration()
     if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
     {
         //cout << "Creating new shape" << endl;
+        this->newShapeColor = this->nextShapeColor;
         this->newShape(nextShapeType);
 
         this->nextShapeType = rand() % 18;
+        this->nextShapeColor = rand() % 5;
         //this->nextShapeType = SHAPE_7A;
         //cout << "Next shape is : " << nextShapeType << endl;
         this->gameState = GAME_STATE_NEWSHAPE_FALL;
@@ -99,7 +101,7 @@ void logic::newShape(int newShapeType)
     this->newShapeType = newShapeType;
 
     // Get the shape new block color
-    int newBlockColor = rand() % 5;
+    int newBlockColor = this->newShapeColor;
 
     // Every new shape get 4 block, build the block first
     cout << "Creating 4 new block..." << endl;

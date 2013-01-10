@@ -16,6 +16,7 @@
 #include <string>
 #include <iostream>
 #include <cstdio>
+#include <list>
 
 
 #define GAME_LOOP_SPEED_NORMAL 200
@@ -75,6 +76,10 @@
 #define GAME_NEXTSHAPE_BLOCK_START_X 50
 #define GAME_NEXTSHAPE_BLOCK_START_Y 50
 
+#define MUSIC_TOTAL_NUM 2
+#define MUSIC_NUM_1 0
+#define MUSIC_NUM 2 1
+
 
 
 using namespace std;
@@ -83,5 +88,4 @@ class logic;
 class control;
 class canvas;
 class interfacegame;
-
-
+class score;

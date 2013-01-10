@@ -1,13 +1,24 @@
+#pragma once
 #include "main.h"
 
 class score
 {
 private:
+    int scoreValue;
+    string playerName;
+
+    // Allegro drawing part
     BITMAP *scoreBorder;
-    int gameScores;
+    FONT *scoreFont;
+
 public:
-    void incScores(int increment);
-    void setScores(int newScore);
-    void clearScores();
-    void redrawScores();
+    int readScore();
+    void incScore(int increment);
+    void rstScore();
+    void redrawScore();
+
+    string readPlayerName();
+
+    score(string playerName);
+
 };
