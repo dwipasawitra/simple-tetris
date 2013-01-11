@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1357298366 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.cpp
+	"block.h"
+
+1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.h
+	"main.h"
+
+1357921900 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.h
+	<allegro.h>
+	<string>
+	<iostream>
+	<cstdio>
+	<list>
+	<tinyxml2.h>
+
+1356416109 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.cpp
+	"color.h"
+
+1356416212 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.h
+
+1356353440 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.cpp
+	<highscores.h>
+	<score.h>
+
+1357907130 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.cpp
+	"tetris.h"
+	"main.h"
+
+1357913747 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/tetris.h
+	"main.h"
+	"highscores.h"
+	"game.h"
+
+1357921508 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.h
+	"main.h"
+	"score.h"
+
+1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/score.h
+	"main.h"
+
+1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.h
+	"highscores.h"
+	"block.h"
+	"canvas.h"
+	"logic.h"
+	"control.h"
+	"main.h"
+	"nextshape.h"
+	"music.h"
+	"score.h"
+
+1357844418 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/canvas.h
+	"game.h"
+	"block.h"
+
+1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/logic.h
+	"game.h"
+	"main.h"
+
+1356505961 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/control.h
+	"game.h"
+
+1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/nextshape.h
+	"main.h"
+	"block.h"
+
+1357783595 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/music.h
+	"main.h"
+
+1357783646 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/music.cpp
+	"music.h"
+
+1357844418 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/canvas.cpp
+	"canvas.h"
+
+1357919312 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/control.cpp
+	"control.h"
+
+1357914868 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/game.cpp
+	"game.h"
+	"main.h"
+
+1357844418 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/logic.cpp
+	"logic.h"
+
+1357828288 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/nextshape.cpp
+	"nextshape.h"
+
+1357828288 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/score.cpp
+	"score.h"
+
+1357914507 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/tetris.cpp
+	"tetris.h"
+	"main.h"
+
