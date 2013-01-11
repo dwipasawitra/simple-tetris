@@ -6,7 +6,7 @@ void highscore::reloadHighScore()
     this->highScoreData.clear();
 
     // Initialize XML reader
-    tinyxml2::XMLDocument tes;
+    //tinyxml2::XMLDocument tes;
 
 
 

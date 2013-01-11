@@ -28,70 +28,85 @@ int logic::get_nextShapeColor()
 
 bool logic::gameLogicIteration()
 {
-    // If KEY_DOWN pressed, then turbo the speed
-    gameParent->gameControl->receiveOnlyTurbo();
-
-    // Step1: newShape from nextShapeType before
-    if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
-    {
-        //cout << "Creating new shape" << endl;
-        this->newShapeColor = this->nextShapeColor;
-        this->newShape(nextShapeType);
-
-        this->nextShapeType = rand() % 18;
-        this->nextShapeColor = rand() % 5;
-        //this->nextShapeType = SHAPE_7A;
-        //cout << "Next shape is : " << nextShapeType << endl;
-        this->gameState = GAME_STATE_NEWSHAPE_FALL;
-
-        //cout << "Game state is GAME_STATE_NEWSHAPE_FALL" << endl;
-
-    }
-    // Step2: Full line deletion
-    //cout << "Destroy line routine" << endl;
-    //this->destroyLine();
-
-    //printMatrices();
-
-    // Step3: Collision detector
-    //cout << "Collision detector routine" << endl;
-    if(this->collideDetect())
-    {
-        //cout << "Collision happened" << endl;
-        this->setAllStoned();
-        this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
-        this->destroyLine();
-        gameParent->gameCanvas->redrawGraphic();
-    }
-    else
-    {
-        //cout << "Collision didn't happened" << endl;
-
-        // Step4: Get keyboard control command
-        gameParent->gameControl->receiveControl();
-        gameParent->gameCanvas->redrawGraphic();
-         if(this->collideDetect())
+        int tickSpeed=2;
+        while(tickSpeed--)
         {
-            //cek kedua
-            this->setAllStoned();
-            this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
-            this->destroyLine();
-            gameParent->gameCanvas->redrawGraphic();
-        }
-        else
+            // If KEY_DOWN pressed, then turbo the speed
+            gameParent->gameControl->receiveOnlyTurbo();
+
+            // Step1: newShape from nextShapeType before
+            if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
             {
+                //cout << "Creating new shape" << endl;
+                this->newShapeColor = this->nextShapeColor;
+                this->newShape(nextShapeType);
 
-           // cout <<"2"<<endl;
-            //gameParent->printMatrices();
+                this->nextShapeType = rand() % 18;
+                this->nextShapeColor = rand() % 5;
+                //this->nextShapeType = SHAPE_7A;
+                //cout << "Next shape is : " << nextShapeType << endl;
+                this->gameState = GAME_STATE_NEWSHAPE_FALL;
 
-            // Step5: Go down, flying thing
-            this->goDown();
+                //cout << "Game state is GAME_STATE_NEWSHAPE_FALL" << endl;
+
+            }
+            // Step2: Full line deletion
+            //cout << "Destroy line routine" << endl;
+            //this->destroyLine();
+
+            //printMatrices();
+
+            // Step3: Collision detector
+            //cout << "Collision detector routine" << endl;
+            if(this->collideDetect())
+            {
+                //cout << "Collision happened" << endl;
+                this->setAllStoned();
+                this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+                this->destroyLine();
+                gameParent->gameCanvas->redrawGraphic();
+            }
+            else
+            {
+                //cout << "Collision didn't happened" << endl;
+
+                // Step4: Get keyboard control command
+                gameParent->gameControl->receiveControl();
+                gameParent->gameCanvas->redrawGraphic();
+                 if(this->collideDetect())
+                {
+                    //cek kedua
+                    this->setAllStoned();
+                    this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+                    this->destroyLine();
+                    gameParent->gameCanvas->redrawGraphic();
+                }
+            }
+            rest(this->gameLoopSpeed);
+        }
+            if(this->collideDetect())
+                {
+                    //cek kedua
+                    this->setAllStoned();
+                    this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+                    this->destroyLine();
+                    gameParent->gameCanvas->redrawGraphic();
+                }
+            else
+                {
+
+               // cout <<"2"<<endl;
+                //gameParent->printMatrices();
+
+                // Step5: Go down, flying thing
+                this->goDown();
 
             // Step6: Redraw graphic
             gameParent->gameCanvas->redrawGraphic();
             }
 
-    }
+
+
     rest(this->gameLoopSpeed);
     return false;
 
@@ -1366,7 +1381,7 @@ void logic::moveRight()
             // Block 7C:  Draw (m+1,n)(m,n)(m,n+1)(m,n+2)
             if(this->m+1 < GAME_MAX_X - 1)
             {
-                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+2][n+1]==NULL)
+                if(gameParent->gameBlock[m+2][n]==NULL && gameParent->gameBlock[m+1][n+1]==NULL && gameParent->gameBlock[m+1][n+2]==NULL)
                 {
                     this->moveBlock(m+1,n,m+2,n);
                     this->moveBlock(m,n,m+1,n);

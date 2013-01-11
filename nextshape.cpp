@@ -71,8 +71,8 @@ void nextshape::setNextShapeType(int nextShapeType, int nextShapeColor)
             m = 1; n = 1;
             this->nextShapeBlock[m][n] = block1;
             this->nextShapeBlock[m][n+1] = block2;
-            this->nextShapeBlock[m-1][n] = block3;
-            this->nextShapeBlock[m-1][n-1] = block4;
+            this->nextShapeBlock[m+1][n] = block3;
+            this->nextShapeBlock[m+1][n-1] = block4;
             break;
         case SHAPE_3B:
             // Block 3B:  Draw (m,n)(m-1,n)(m,n-1)(m+1,n-1)
@@ -89,6 +89,102 @@ void nextshape::setNextShapeType(int nextShapeType, int nextShapeColor)
             this->nextShapeBlock[m][n+1] = block2;
             this->nextShapeBlock[m+1][n] = block3;
             this->nextShapeBlock[m+1][n+1] = block4;
+            break;
+        case SHAPE_5A:
+            // Block 5A: Draw (m,n) (m+1,n) (m-1,n) (m,n+1)
+            m = 2; n = 2;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m-1][n] = block3;
+            this->nextShapeBlock[m][n+1] = block4;
+            break;
+        case SHAPE_5B:
+            // Block 5B : Draw (m,n) (m+1,n) (m,n+1) (m,n-1)
+            m = 2; n = 2;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m][n+1] = block3;
+            this->nextShapeBlock[m][n-1] = block4;
+            break;
+        case SHAPE_5C:
+            // Block 5C : Draw (m,n) (m-1,n) (m,n+1) (m,n-1)
+            m = 2; n = 2;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m-1][n] = block2;
+            this->nextShapeBlock[m][n+1] = block3;
+            this->nextShapeBlock[m][n-1] = block4;
+            break;
+        case SHAPE_5D:
+            //Block 5D : Draw (m,n)(m-1,n) (m+1,n) (m,n-1)
+            m = 2; n = 2;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m-1][n] = block2;
+            this->nextShapeBlock[m+1][n] = block3;
+            this->nextShapeBlock[m][n-1] = block4;
+            break;
+        case SHAPE_6A:
+            //Block 6A :  Draw (m,n) (m+1,n) (m+2,n) (m,n-1)
+            m = 1; n = 1;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m+2][n] = block3;
+            this->nextShapeBlock[m][n-1] = block4;
+            break;
+        case SHAPE_6B:
+            //BLOCK 6B : Draw (m,n) (m+1,n) (m,n+1) (m,n+2)
+            m = 1; n = 1;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m][n+1] = block3;
+            this->nextShapeBlock[m][n+2] = block4;
+            break;
+        case SHAPE_6C:
+            //BLOCK 6C : Draw (m,n) (m-1,n) (m,n-1) (m,n-2)
+            m = 2; n = 3;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m-1][n] = block2;
+            this->nextShapeBlock[m][n-1] = block3;
+            this->nextShapeBlock[m][n-2] = block4;
+            break;
+        case SHAPE_6D:
+            //BLOCK 6D : Draw (m,n) (m-1,n) (m-2,n) (m,n+1)
+            m = 3; n = 1;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m-1][n] = block2;
+            this->nextShapeBlock[m-2][n] = block3;
+            this->nextShapeBlock[m][n+1] = block4;
+            break;
+        case SHAPE_7A:
+            //BLOCK 7A : Draw (m,n) (m,n-1) (m-1,n) (m-2,n)
+            m = 2; n = 3;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m][n-1] = block2;
+            this->nextShapeBlock[m-1][n] = block3;
+            this->nextShapeBlock[m-2][n] = block4;
+            break;
+        case SHAPE_7B:
+            //BLOCK 7B : Draw (m,n) (m-1,n) (m,n+1) (m,n+2)
+            m = 2; n = 1;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m-1][n] = block2;
+            this->nextShapeBlock[m][n+1] = block3;
+            this->nextShapeBlock[m][n+2] = block4;
+            break;
+        case SHAPE_7C:
+            //BLOCK 7C : Draw (m,n) (m+1,n) (m,n-1) (m,n-2)
+            m = 1; n = 3;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m][n-1] = block3;
+            this->nextShapeBlock[m][n-2] = block4;
+            break;
+        case SHAPE_7D:
+            //BLOCK 7D : Draw (m,n) (m+1,n) (m+2,n) (m,n+1)
+            m = 1; n = 1;
+            this->nextShapeBlock[m][n] = block1;
+            this->nextShapeBlock[m+1][n] = block2;
+            this->nextShapeBlock[m+2][n] = block3;
+            this->nextShapeBlock[m][n+1] = block4;
             break;
     }
 
