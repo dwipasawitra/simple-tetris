@@ -2,10 +2,10 @@
 1357298366 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.cpp
 	"block.h"
 
-1357828288 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.h
+1357925627 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/block.h
 	"main.h"
 
-1357921900 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.h
+1357925627 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.h
 	<allegro.h>
 	<string>
 	<iostream>
@@ -18,9 +18,8 @@
 
 1356416212 /media/DATA/Journal/2012A/PBO/FP/simple-tetris/color.h
 
-1356353440 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.cpp
-	<highscores.h>
-	<score.h>
+1357921990 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/highscores.cpp
+	"highscores.h"
 
 1357907130 source:/media/DATA/Journal/2012A/PBO/FP/simple-tetris/main.cpp
 	"tetris.h"
