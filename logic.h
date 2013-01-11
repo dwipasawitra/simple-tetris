@@ -13,6 +13,7 @@ private:
 
     int gameState;
     int gameLoopSpeed;
+    int tickSpeed;
     int m, n;  // Track new shape
     int newShapeType;
     int newShapeColor;

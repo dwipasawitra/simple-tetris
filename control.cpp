@@ -12,37 +12,43 @@ void control::receiveControl()
     if(key[KEY_LEFT])
     {
         gameParent->gameLogic->moveLeft();
-        gameParent->gameLogic->moveLeft();
-        rest(100);
-        while(key[KEY_LEFT] && n>0)
+        gameParent->gameCanvas->redrawGraphic();
+        rest(GAME_LOOP_SPEED_TICKSPEED);
+        /*while(key[KEY_LEFT] && n>0)
         {
             gameParent->gameLogic->moveLeft();
             gameParent->gameCanvas->redrawGraphic();
             n--;
             rest(GAME_LOOP_SPEED_TURBO);
-        }
+        }*/
     }
     if(key[KEY_RIGHT])
     {
         gameParent->gameLogic->moveRight();
-        rest(100);
-        while(key[KEY_RIGHT] && n>0)
+        gameParent->gameCanvas->redrawGraphic();
+        rest(GAME_LOOP_SPEED_TICKSPEED);
+        /*while(key[KEY_RIGHT] && n>0)
         {
             gameParent->gameLogic->moveRight();
             gameParent->gameCanvas->redrawGraphic();
             n--;
             rest(GAME_LOOP_SPEED_TURBO);
-        }
+        }*/
     }
     if(key[KEY_UP])
     {
         gameParent->gameLogic->rotateShape();
+        rest(GAME_LOOP_SPEED_TICKSPEED);
     }
 
 }
 
 void control::receiveOnlyTurbo()
 {
-    if(key[KEY_DOWN]) gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_TURBO;
+    if(key[KEY_DOWN])
+    {
+        gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_TURBO;
+        gameParent->gameLogic->tickSpeed = 2;
+    }
     else gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_NORMAL;
 }
