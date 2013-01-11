@@ -12,6 +12,7 @@ public:
     void reloadHighScore();
     void newHighScore(score *newHighScore);
     void saveHighScore();
+    void addScore(string playerName, int score);
     highscore() { };
 
 };
@@ -19,6 +20,9 @@ public:
 
 class interfaceHighScore : public highscore
 {
+private:
+    BITMAP *hsBackground;
 public:
-    void displayHighScore() { };
+    void displayHighScore();
+    interfaceHighScore();
 };

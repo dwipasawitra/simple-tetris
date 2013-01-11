@@ -75,6 +75,7 @@ void tetris::start()       // Start game method
             break;
         case TETRIS_INTERFACE_HIGHSCORE:
             hsIface = new interfaceHighScore();
+
             this->highScores();
             break;
         }
@@ -164,7 +165,11 @@ void tetris::highScores()  // Open highscore interface
 {
     this->clearWindow();
 
+    hsIface->reloadHighScore();
     hsIface->displayHighScore();
+
+
+    while(!key[KEY_ESC]);
 }
 
 tetris::tetris(int startInterface)

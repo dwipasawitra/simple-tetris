@@ -20,5 +20,6 @@ public:
     string readPlayerName();
 
     score(string playerName);
+    score(string playerName, int score);
 
 };

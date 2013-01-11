@@ -28,6 +28,8 @@ int logic::get_nextShapeColor()
 
 bool logic::gameLogicIteration()
 {
+
+
     // If KEY_DOWN pressed, then turbo the speed
     gameParent->gameControl->receiveOnlyTurbo();
 
@@ -55,6 +57,7 @@ bool logic::gameLogicIteration()
 
     // Step3: Collision detector
     //cout << "Collision detector routine" << endl;
+
     if(this->collideDetect())
     {
         //cout << "Collision happened" << endl;
@@ -70,7 +73,10 @@ bool logic::gameLogicIteration()
         // Step4: Get keyboard control command
         gameParent->gameControl->receiveControl();
         gameParent->gameCanvas->redrawGraphic();
-         if(this->collideDetect())
+        rest(100);
+
+
+        if(this->collideDetect())
         {
             //cek kedua
             this->setAllStoned();
@@ -79,9 +85,9 @@ bool logic::gameLogicIteration()
             gameParent->gameCanvas->redrawGraphic();
         }
         else
-            {
+        {
 
-           // cout <<"2"<<endl;
+            // cout <<"2"<<endl;
             //gameParent->printMatrices();
 
             // Step5: Go down, flying thing
@@ -89,7 +95,9 @@ bool logic::gameLogicIteration()
 
             // Step6: Redraw graphic
             gameParent->gameCanvas->redrawGraphic();
-            }
+
+
+        }
 
     }
     rest(this->gameLoopSpeed);

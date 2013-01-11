@@ -84,6 +84,7 @@
 
 
 using namespace std;
+using namespace tinyxml2;
 class game;
 class logic;
 class control;

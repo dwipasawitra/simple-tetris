@@ -5,6 +5,13 @@ score::score(string playerName)
     this->scoreValue = 0;
     this->playerName = playerName;
 }
+
+score::score(string playerName, int score)
+{
+    this->scoreValue = score;
+    this->playerName = playerName;
+}
+
 int score::readScore()
 {
     return this->scoreValue;
