@@ -52,8 +52,11 @@ void interfaceTetris::requestPlayerName()
     // Draw popup window in front of games
     blit(this->newPlayerPopup, screen, 0, 0, 53.5 , 115, 533, 250);
 
+
     // START KEYCODE READER -- SRC: http://www.gamedev.net/page/resources/_/technical/game-programming/text-input-in-an-allegro-game-r2130 //
+    // OMG Still buggy and couldn't be implemented
     readkey();
+
     do
     {
       if(keypressed())
@@ -62,7 +65,7 @@ void interfaceTetris::requestPlayerName()
          char ASCII    = newkey & 0xff;
          char scancode = newkey >> 8;
 
-         /* a character key was pressed; add it to the string */
+
          if(ASCII >= 32 && ASCII <= 126)
          {
                                 if(n < playerNameSize - 1)
@@ -78,11 +81,12 @@ void interfaceTetris::requestPlayerName()
             input[n] = '\0';
          }
       }
-       /* all drawing goes here */
 
       textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, 0);
 
     }
+
+
     while(!key[KEY_ENTER]);
 
     // END KEYCODE READER //
@@ -91,8 +95,11 @@ void interfaceTetris::requestPlayerName()
     input_str = string(input);
     this->newScore(input_str);
 
+
+
     // Restore game interface
     this->initScreen();
+
 }
 
 void interfaceTetris::initScreen()
@@ -121,7 +128,7 @@ void interfaceTetris::newGame()
     this->gameLogic->resetState();
 
     // Input player name
-    this->requestPlayerName();
+    //this->requestPlayerName();
 
     // Wait for user to press ENTER
     while(!key[KEY_ENTER]);
@@ -132,6 +139,7 @@ void interfaceTetris::newGame()
     // OK, game loop starter until you are game over
     this->gameLoop();
 }
+
 void interfaceTetris::stopGame()
 {
 

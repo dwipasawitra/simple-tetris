@@ -11,6 +11,7 @@ protected:
 public:
     void reloadHighScore();
     void newHighScore(score *newHighScore);
+    void saveHighScore();
     highscore() { };
 
 };

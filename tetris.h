@@ -26,6 +26,10 @@ private:
     interfaceTetris *gameIface;
     interfaceHighScore *hsIface;
     FONT *gameFont;
+    BITMAP *menuBackground;
+    BITMAP *logoBig;
+    BITMAP *menuSelection;
+    BITMAP *menuItem;
     PALLETE pallete;
 
     void initWindow();

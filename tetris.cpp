@@ -17,18 +17,6 @@
 void tetris::initWindow()
 {
     cout << "Class started" << endl;
-    /* Allegro Initializer */
-    allegro_init();
-    install_keyboard();     // Install keyboard driver
-    install_timer();        // Install timer driver
-    set_color_depth(desktop_color_depth());
-
-    // Install sound driver
-    if (install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL) != 0) {
-        allegro_message("Error initializing sound system\n%s\n", allegro_error);
-
-
-    }
 
 
     /* Game Font Experiment */
@@ -64,15 +52,14 @@ void tetris::destroyWindow()
 
 }
 
+
 void tetris::start()       // Start game method
 {
 
     // Init a new Allegro Window
     this->initWindow();
 
-    // Init interfacetetris class
-    gameIface = new interfaceTetris();
-    hsIface = new interfaceHighScore();
+
 
     // Open a window depending the state
     while(1)
@@ -83,9 +70,11 @@ void tetris::start()       // Start game method
             this->mainMenu();
             break;
         case TETRIS_INTERFACE_GAME:
+            gameIface = new interfaceTetris();
             this->tetrisInterface();
             break;
         case TETRIS_INTERFACE_HIGHSCORE:
+            hsIface = new interfaceHighScore();
             this->highScores();
             break;
         }
@@ -95,7 +84,8 @@ void tetris::start()       // Start game method
 
 void tetris::mainMenu()    // Open Main menu interface
 {
-    int selection;
+    BITMAP *buffer;
+    int selection = 0;
     bool selected = false;
 
     // First, clear screen
@@ -103,38 +93,71 @@ void tetris::mainMenu()    // Open Main menu interface
 
     cout << "Menu show";
 
-    // Draw a selection text
-    // Change "font" to "gameFont" to implement font experiment
-    textout_centre_ex(screen, gameFont, "TETRIS", SCREEN_W/2, 40, COLOR_WHITE, 0);
-    textout_centre_ex(screen, gameFont, "1. Mulai Permainan", SCREEN_W/2, 80, COLOR_WHITE,0);
-    textout_centre_ex(screen, gameFont, "2. Skor tertinggi", SCREEN_W/2, 113, COLOR_WHITE, 0);
-    textout_centre_ex(screen, gameFont, "3. Tentang permainan ini", SCREEN_W/2, 146, COLOR_WHITE, 0);
+    // Copy background to buffer
+    buffer = create_bitmap(640, 480);
+    draw_sprite(buffer, this->menuBackground, 0, 0);
 
-    // OK select the menu, 1, 2 or 3
+    // Draw logo
+    draw_sprite(buffer, this->logoBig, 110, 50);
+
+
+    // Draw menu item
+    draw_sprite(buffer, this->menuItem, 120, 200);
+    blit(buffer, screen, 0, 0, 0, 0, 640, 480);
+
     while(!selected)
     {
-        if(key[KEY_1])
+        // Clear selection part first
+        blit(this->menuBackground, buffer, 88, 200, 88, 200, 34, 191);
+
+
+        // Redraw selection position
+        draw_sprite(buffer, this->menuSelection, 88, selection * 51 + 200);
+        blit(buffer, screen, 0, 0, 0, 0, 640, 480);
+
+        // Check keystroke
+        if(key[KEY_UP])
         {
-            this->interfaceState = TETRIS_INTERFACE_GAME;
-            selected = true;
+            if(selection > 0) selection--;
+            while(key[KEY_UP]);
         }
-        else if(key[KEY_2])
+        else if(key[KEY_DOWN])
         {
-            this->interfaceState = TETRIS_INTERFACE_HIGHSCORE;
-            selected = true;
+            if(selection < 3) selection++;
+            while(key[KEY_DOWN]);
         }
-        rest(1);   // Block fast key repeat
+        else if(key[KEY_ENTER])
+        {
+            switch(selection)
+            {
+                case 0:
+                    this->interfaceState = TETRIS_INTERFACE_GAME;
+                    selected = true;
+                    break;
+                case 1:
+                    this->interfaceState = TETRIS_INTERFACE_HIGHSCORE;
+                    selected = true;
+                    break;
+
+            }
+        }
+
+
     }
+
 }
 void tetris::tetrisInterface() // Open Tetris interface
 {
     this->clearWindow();
+
 
     // Initialization game Interface
     gameIface->initScreen();
 
     // Now interfaceTetris class will do the rest thing;
     gameIface->newGame();
+
+
 }
 
 void tetris::highScores()  // Open highscore interface
@@ -147,6 +170,13 @@ void tetris::highScores()  // Open highscore interface
 tetris::tetris(int startInterface)
 {
     interfaceState = startInterface;
+
+    // Load some bitmap
+    this->menuBackground = load_bitmap("menu.bmp", NULL);
+    this->logoBig = load_bitmap("tetris-logo-big.bmp", NULL);
+    this->menuSelection = load_bitmap("selection.bmp", NULL);
+    this->menuItem = load_bitmap("menu-item.bmp", NULL);
+
 }
 tetris::~tetris()
 {

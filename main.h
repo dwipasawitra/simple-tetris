@@ -17,10 +17,11 @@
 #include <iostream>
 #include <cstdio>
 #include <list>
+#include <tinyxml2.h>
 
 
 #define GAME_LOOP_SPEED_NORMAL 200
-#define GAME_LOOP_SPEED_TURBO 100
+#define GAME_LOOP_SPEED_TURBO 50
 #define GAME_CANVAS_START_X 20
 #define GAME_CANVAS_START_Y 20
 #define GAME_CANVAS_BACKGROUND makecol(0,0,0)
