@@ -200,10 +200,10 @@
 1357299403 source:e:\simple-tetris\block.cpp
 	"block.h"
 
-1357743443 e:\simple-tetris\block.h
+1357916740 e:\simple-tetris\block.h
 	"main.h"
 
-1357743632 e:\simple-tetris\main.h
+1357912841 e:\simple-tetris\main.h
 	<allegro.h>
 	<string>
 	<iostream>
@@ -252,7 +252,7 @@
 	<highscores.h>
 	<score.h>
 
-1357748843 source:e:\simple-tetris\logic.cpp
+1357923242 source:e:\simple-tetris\logic.cpp
 	"logic.h"
 
 1357298882 source:e:\simple-tetris\main.cpp
