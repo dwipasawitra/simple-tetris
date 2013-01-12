@@ -46,6 +46,8 @@
 		<Unit filename="score.h" />
 		<Unit filename="tetris.cpp" />
 		<Unit filename="tetris.h" />
+		<Unit filename="tinyxml2.cpp" />
+		<Unit filename="tinyxml2.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

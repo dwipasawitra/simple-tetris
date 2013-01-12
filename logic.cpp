@@ -80,6 +80,7 @@ void logic::gameLogicIteration()
                     this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
                     this->destroyLine();
                     gameParent->gameCanvas->redrawGraphic();
+                    gameParent->gameScore->incScore(GAME_SCORE_STONED);
                 }
             }
             rest(this->gameLoopSpeed);
@@ -91,6 +92,7 @@ void logic::gameLogicIteration()
                     this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
                     this->destroyLine();
                     gameParent->gameCanvas->redrawGraphic();
+                    gameParent->gameScore->incScore(GAME_SCORE_STONED);
                 }
             else
                 {
@@ -1662,7 +1664,8 @@ void logic::rotateShape()
 
 void logic::destroyLine()
 {
-    int checkBlockX,checkBlockY,checkBlock,redrawBlockY,redrawBlockX;
+    int counter = 1;
+    int checkBlockX,checkBlockY,checkBlock,redrawBlockY,redrawBlockX,scoreDestroy;
     checkBlockY = GAME_MAX_Y;
     for(checkBlockY > 0 ; checkBlockY--;)
     {
@@ -1682,7 +1685,12 @@ void logic::destroyLine()
         }
         checkBlockX = GAME_MAX_X;
         if(checkBlock == GAME_MAX_X)
-        {   //For deleting a completed Row
+        {
+            scoreDestroy = counter * GAME_SCORE_DESTROY;
+            counter++;
+            //For Adding the score for destroying a line
+            gameParent->gameScore->incScore(scoreDestroy);
+            //For deleting a completed Row
             for(checkBlockX>0;checkBlockX--;)
             {
                 delete gameParent->gameBlock[checkBlockX][checkBlockY];

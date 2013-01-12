@@ -18,7 +18,7 @@
 #include <cstdio>
 #include <list>
 #include <cstdlib>
-#include <tinyxml2.h>
+#include "tinyxml2.h"
 
 
 #define GAME_LOOP_SPEED_NORMAL 75
@@ -31,6 +31,8 @@
 #define GAME_STATE_NEWSHAPE_FALL 1
 #define GAME_MAX_X 16
 #define GAME_MAX_Y 26
+#define GAME_SCORE_DESTROY 50
+#define GAME_SCORE_STONED 5
 
 #define TETRIS_INTERFACE_MENU 0
 #define TETRIS_INTERFACE_GAME 1
