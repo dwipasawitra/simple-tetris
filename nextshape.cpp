@@ -29,7 +29,7 @@ void nextshape::setNextShapeType(int nextShapeType, int nextShapeColor)
     block *block3 = new block(this->nextShapeColor, BLOCK_STATE_DUMMY);
     block *block4 = new block(this->nextShapeColor, BLOCK_STATE_DUMMY);
 
-    cout << this->nextShapeType << endl;
+    //9cout << this->nextShapeType << endl;
 
     // Heap the block, depending on its type
     switch(this->nextShapeType)

@@ -41,9 +41,9 @@ void logic::gameLogicIteration()
                 this->newShapeColor = this->nextShapeColor;
                 this->newShape(nextShapeType);
 
-                this->nextShapeType = rand() % 18;
+                //this->nextShapeType = rand() % 18;
                 this->nextShapeColor = rand() % 5;
-                //this->nextShapeType = SHAPE_7A;
+                this->nextShapeType = SHAPE_1A;
                 //cout << "Next shape is : " << nextShapeType << endl;
                 this->gameState = GAME_STATE_NEWSHAPE_FALL;
 
@@ -65,6 +65,7 @@ void logic::gameLogicIteration()
                 this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
                 this->destroyLine();
                 gameParent->gameCanvas->redrawGraphic();
+                gameParent->gameScore->incScore(GAME_SCORE_STONED);
             }
             else
             {
@@ -73,7 +74,7 @@ void logic::gameLogicIteration()
                 // Step4: Get keyboard control command
                 gameParent->gameControl->receiveControl();
                 gameParent->gameCanvas->redrawGraphic();
-                 if(this->collideDetect())
+                 /*if(this->collideDetect())
                 {
                     //cek kedua
                     this->setAllStoned();
@@ -81,7 +82,7 @@ void logic::gameLogicIteration()
                     this->destroyLine();
                     gameParent->gameCanvas->redrawGraphic();
                     gameParent->gameScore->incScore(GAME_SCORE_STONED);
-                }
+                }*/
             }
             rest(this->gameLoopSpeed);
         }
@@ -124,7 +125,7 @@ void logic::newShape(int newShapeType)
     int newBlockColor = this->newShapeColor;
 
     // Every new shape get 4 block, build the block first
-    cout << "Creating 4 new block..." << endl;
+    //cout << "Creating 4 new block..." << endl;
     block *block1 = new block(newBlockColor, BLOCK_STATE_FLY);
     block *block2 = new block(newBlockColor, BLOCK_STATE_FLY);
     block *block3 = new block(newBlockColor, BLOCK_STATE_FLY);
@@ -132,7 +133,7 @@ void logic::newShape(int newShapeType)
 
     // First move point of new block;
 
-    cout << "m=8, n=0" << endl;
+    //cout << "m=8, n=0" << endl;
     m = 8;
 
     // OK, depending on its type, draw a new shape in Block
@@ -1657,6 +1658,7 @@ void logic::rotateShape()
             break;
 
     }
+    counter = 1;
 
 }
 
@@ -1664,7 +1666,7 @@ void logic::rotateShape()
 
 void logic::destroyLine()
 {
-    int counter = 1;
+
     int checkBlockX,checkBlockY,checkBlock,redrawBlockY,redrawBlockX,scoreDestroy;
     checkBlockY = GAME_MAX_Y;
     for(checkBlockY > 0 ; checkBlockY--;)
@@ -1687,7 +1689,9 @@ void logic::destroyLine()
         if(checkBlock == GAME_MAX_X)
         {
             scoreDestroy = counter * GAME_SCORE_DESTROY;
+            cout<<" "<<counter;
             counter++;
+            cout<<" "<<counter<<endl;
             //For Adding the score for destroying a line
             gameParent->gameScore->incScore(scoreDestroy);
             //For deleting a completed Row
