@@ -17,7 +17,8 @@
 #include <iostream>
 #include <cstdio>
 #include <list>
-//#include <tinyxml2.h>
+#include <cstdlib>
+#include <tinyxml2.h>
 
 
 #define GAME_LOOP_SPEED_NORMAL 75
@@ -78,9 +79,21 @@
 #define GAME_NEXTSHAPE_BLOCK_START_X 50
 #define GAME_NEXTSHAPE_BLOCK_START_Y 50
 
+#define GAME_SCOREBOARD_START_X 420
+#define GAME_SCOREBOARD_START_Y 50
+#define GAME_SCOREBOARD_WIDTH 160
+#define GAME_SCOREBOARD_HEIGHT 99
+#define GAME_SCOREBOARD_PLAYERNAME_Y 60
+#define GAME_SCOREBOARD_SCORE_Y 90
+
 #define MUSIC_TOTAL_NUM 2
 #define MUSIC_NUM_1 0
 #define MUSIC_NUM 2 1
+
+#define HIGHSCORE_ITEM_START_X 100
+#define HIGHSCORE_ITEM_START_Y 100
+#define HIGHSCORE_ITEM_HEIGHT 50
+#define HIGHSCORE_SCORENUMBER 300
 
 
 

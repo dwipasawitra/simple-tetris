@@ -1,9 +1,14 @@
 #include "highscores.h"
 
+bool hsComp(score *first, score *second)
+{
+    return (*first > *second);
+}
 void highscore::reloadHighScore()
 {
     string playerNameTMP;
     int scoreTMP;
+
     // Clear highscore list first
     this->highScoreData.clear();
 
@@ -15,7 +20,7 @@ void highscore::reloadHighScore()
     // Get first child
     nodeTransversal = xmlHighScore.FirstChildElement("hs");
     playerNameTMP = string(nodeTransversal->FirstChildElement("name")->GetText());
-    scoreTMP = nodeTransversal->IntAttribute("score");
+    scoreTMP = atoi(nodeTransversal->FirstChildElement("score")->GetText());
     this->addScore(playerNameTMP, scoreTMP);
 
     // Get all node
@@ -25,7 +30,7 @@ void highscore::reloadHighScore()
         if(nodeTransversal)
         {
             playerNameTMP = string(nodeTransversal->FirstChildElement("name")->GetText());
-            scoreTMP = nodeTransversal->IntAttribute("score");
+            scoreTMP = atoi(nodeTransversal->FirstChildElement("score")->GetText());
             this->addScore(playerNameTMP, scoreTMP);
         }
         else
@@ -34,15 +39,40 @@ void highscore::reloadHighScore()
         }
     }
 
+    // Sort highscore depend on its score
+    this->highScoreData.sort(hsComp);
+
 
 
 }
 void highscore::newHighScore(score *newHighScore)
 {
-    if(newHighScore != NULL)
-    {
-        this->highScoreData.push_back(newScore);
-    }
+    // SAVE NEW SCORE DIRECTLY INTO XML FILE
+    // Load XML file
+    char scoreStr[10];
+
+    XMLDocument doc;
+    XMLElement *nodeTransversal;
+    doc.LoadFile("score.xml");
+
+    // Write its child first
+    XMLText *nameText = doc.NewText(newHighScore->readPlayerName().c_str());
+    XMLElement *name = doc.NewElement("name");
+    name->InsertEndChild(nameText);
+
+    sprintf(scoreStr, "%d", newHighScore->readScore());
+    XMLText *scoreText = doc.NewText(scoreStr);
+    XMLElement *score = doc.NewElement("score");
+    score->InsertEndChild(scoreText);
+
+    // Create new node
+    XMLElement* hs = doc.NewElement("hs");
+    hs->InsertEndChild(name);
+    hs->InsertEndChild(score);
+
+    doc.InsertEndChild(hs);
+
+    doc.SaveFile("score.xml");
 }
 
 void highscore::saveHighScore()
@@ -62,10 +92,30 @@ interfaceHighScore::interfaceHighScore()
 {
     // Load background bitmap
     this->hsBackground = load_bitmap("highscore.bmp", NULL);
+
+    // Load font
+    hsFont = load_font("font-highscore.pcx", pallete, NULL);
 }
 
 void interfaceHighScore::displayHighScore()
 {
-    blit(this->hsBackground, screen, 0, 0, 0, 0, 640, 480);
+    // Buffer hsBackground
+    BITMAP *buffer;
+    buffer = create_bitmap(640, 480);
+    draw_sprite(buffer, this->hsBackground, 0, 0);
+
+    // Display highscore title.
+    textout_centre_ex(buffer, this->hsFont, "SKOR TERTINGGI", 320, 50, makecol(0,0,0), -1);
+    // Iterate highScoreData, display each name and score
+    list<score *>::iterator it = this->highScoreData.begin();
+    for(int i=0; i < this->highScoreData.size(); i++)
+    {
+        // Display each name
+        textprintf_ex(buffer, this->hsFont, HIGHSCORE_ITEM_START_X, HIGHSCORE_ITEM_START_Y + i * HIGHSCORE_ITEM_HEIGHT, makecol(255,255,255), -1, (*it)->readPlayerName().c_str());
+        textprintf_ex(buffer, this->hsFont, HIGHSCORE_ITEM_START_X + HIGHSCORE_SCORENUMBER, HIGHSCORE_ITEM_START_Y + i * HIGHSCORE_ITEM_HEIGHT, makecol(255,255,255), -1, "%05d", (*it)->readScore());
+        ++it;
+    }
+
+    blit(buffer, screen, 0, 0, 0, 0, 640, 480);
 
 }

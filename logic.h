@@ -31,7 +31,7 @@ private:
     void destroyLine();
 
 public:
-    bool gameLogicIteration();
+    void gameLogicIteration();
 
     int get_nextShapeType();
     void set_nextShapeType(int nextShapeType);

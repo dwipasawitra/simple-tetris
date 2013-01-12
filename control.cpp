@@ -40,6 +40,10 @@ void control::receiveControl()
         gameParent->gameLogic->rotateShape();
         rest(GAME_LOOP_SPEED_TICKSPEED);
     }
+    if(key[KEY_ESC])
+    {
+        gameParent->pauseGame();
+    }
 
 }
 

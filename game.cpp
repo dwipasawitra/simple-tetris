@@ -55,15 +55,20 @@ void interfaceTetris::requestPlayerName()
 
     // START KEYCODE READER -- SRC: http://www.gamedev.net/page/resources/_/technical/game-programming/text-input-in-an-allegro-game-r2130 //
     // OMG Still buggy and couldn't be implemented
-    readkey();
+    clear_keybuf();
+    strcpy(input, "");
+    n=0;
+
 
     do
     {
       if(keypressed())
       {
+
          int  newkey   = readkey();
          char ASCII    = newkey & 0xff;
          char scancode = newkey >> 8;
+
 
 
          if(ASCII >= 32 && ASCII <= 126)
@@ -82,17 +87,15 @@ void interfaceTetris::requestPlayerName()
          }
       }
 
-      textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, 0);
-
+      textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, -1);
     }
-
-
     while(!key[KEY_ENTER]);
 
     // END KEYCODE READER //
 
     // Set new score
     input_str = string(input);
+
     this->newScore(input_str);
 
 
@@ -102,23 +105,15 @@ void interfaceTetris::requestPlayerName()
 
 }
 
-void interfaceTetris::initScreen()
-{
-    // Display Background
-    this->redrawBackground();
-
-    // Draw game Canvas
-    this->gameCanvas->redrawBorder();
-
-    // Display Next Shape
-    this->gameNextShape->redrawNextShape();
-
-    // Display score board
-
-}
 
 void interfaceTetris::newGame()
 {
+    // Init screen
+    this->initScreen();
+
+    // Set game over to zero
+    this->gameOver = false;
+
     // Clear the game screen
     //cout << "Clear all game block" << endl;
     this->gameLogic->clearBlock();
@@ -128,7 +123,7 @@ void interfaceTetris::newGame()
     this->gameLogic->resetState();
 
     // Input player name
-    //this->requestPlayerName();
+    this->requestPlayerName();
 
     // Wait for user to press ENTER
     while(!key[KEY_ENTER]);
@@ -138,11 +133,46 @@ void interfaceTetris::newGame()
 
     // OK, game loop starter until you are game over
     this->gameLoop();
+
+    // Game over interface
+    this->gameOverInterface();
 }
 
-void interfaceTetris::stopGame()
+void interfaceTetris::gameOverInterface()
 {
+    char scoreOutput[10]; // C compatibility
+    int selected = false;
 
+    // Display game over popup
+    blit(this->gameOverPopup, screen, 0, 0, 53.5 , 115, 533, 250);
+
+    // Display player name on popup
+    textout_centre_ex(screen, this->gameFontBig, this->gameScore->readPlayerName().c_str(), 320, 175, makecol(255,255,255), -1);
+
+    // Display player score
+    sprintf(scoreOutput, "%05d", this->gameScore->readScore());
+    textout_centre_ex(screen, this->gameFontBig, scoreOutput, 320, 215, makecol(255,0,0), -1);
+
+    // Save score into highscore
+    highscore::newHighScore(this->gameScore);
+
+    // Receive control
+    while(!selected)
+    {
+        if(key[KEY_ENTER])
+        {
+            // Ulangi permainan
+            while(key[KEY_ENTER]);
+            selected = true;
+            this->newGame();
+        }
+        else if(key[KEY_ESC])
+        {
+            // Keluar dari permainan
+            while(key[KEY_ESC]);
+            selected = true;
+        }
+    }
 }
 
 
@@ -153,11 +183,14 @@ game::game()
     this->gameLogic = new logic(this);
     this->gameNextShape = new nextshape();
     this->gameMusic = new music();
+    this->gameScore = NULL;
 
     // Get some image
     this->background = load_bitmap("background.pcx", NULL);
     this->newPlayerPopup = load_bitmap("player_name.bmp", NULL);
     this->gameFontBig = load_font("font.pcx", this->pallete, NULL);
+    this->pausePopup = load_bitmap("paused.bmp", NULL);
+    this->gameOverPopup = load_bitmap("gameover.bmp", NULL);
 }
 
 void game::gameLoop()
@@ -170,23 +203,22 @@ void game::gameLoop()
     // OK now start the game loop
     //cout << "[GAME LOOP STARTED]" << endl;
 
-    while(!gameOver)
+    while(!this->gameOver)
     {
         // Draw next shape type
 
         this->gameNextShape->setNextShapeType(this->gameLogic->get_nextShapeType(), this->gameLogic->get_nextShapeColor());
         this->gameNextShape->redrawNextShape();
-        // Draw score board
 
+        // Draw score board
+        this->gameScore->redrawScore();
 
         // Draw a game
         // Game iteration start here
-        gameOver = gameLogic->gameLogicIteration();
+        gameLogic->gameLogicIteration();
 
     }
 
-    // Game over state, now freeze the game screen
-    // Show game over text
 
 
 }
@@ -211,4 +243,60 @@ void game::newScore(string playerName)
 void game::redrawBackground()
 {
     blit(background, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+}
+
+
+void game::pauseGame()
+{
+    bool selected = false;
+    while(key[KEY_ESC]);
+
+    // Tampilkan popup untuk pause
+    blit(this->pausePopup, screen, 0, 0, 53.5 , 115, 533, 250);
+
+    // Ambil tombol perintah dari pengguna
+    while(!selected)
+    {
+        if(key[KEY_ENTER])
+        {
+            // Batalkan penahanan
+            while(key[KEY_ENTER]);
+            selected = true;
+            this->initScreen();
+        }
+        else if(key[KEY_ESC])
+        {
+            // Keluar dari permainan
+            while(key[KEY_ESC]);
+            this->abortGame();
+            selected = true;
+        }
+    }
+}
+
+void game::abortGame()
+{
+    // Redraw interface to make smooth transition
+    this->initScreen();
+
+
+    // Set true, return control to interfaceTetris class
+    this->gameOver = true;
+
+
+}
+
+void game::initScreen()
+{
+    // Display Background
+    this->redrawBackground();
+
+    // Draw game Canvas
+    this->gameCanvas->redrawBorder();
+
+    // Display Next Shape
+    this->gameNextShape->redrawNextShape();
+
+    // Display score board
+
 }

@@ -22,6 +22,7 @@
 #include "nextshape.h"
 #include "music.h"
 #include "score.h"
+#include "highscores.h"
 
 class game
 {
@@ -34,6 +35,8 @@ protected:
     BITMAP* background;
     BITMAP* gameBorder;
     BITMAP* newPlayerPopup;
+    BITMAP* pausePopup;
+    BITMAP* gameOverPopup;
     PALLETE pallete;
 
     // Game Element
@@ -46,11 +49,15 @@ protected:
     score *gameScore;
 
     // Game variabel
-    string playerName;
     bool gameOver;
 
     // Game Element method
     void gameLoop();
+    void initScreen();
+    void pauseGame();
+    void abortGame();
+
+
     void newScore(string playerName);
     void redrawBackground();
 
@@ -64,10 +71,10 @@ class interfaceTetris : public game
 {
 
 public:
-    void initScreen();
     void requestPlayerName();
-    interfaceTetris();
+    void gameOverInterface();
     void newGame();
-    void stopGame();
+
+    interfaceTetris();
 };
 

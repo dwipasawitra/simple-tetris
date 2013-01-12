@@ -10,7 +10,7 @@ protected:
 
 public:
     void reloadHighScore();
-    void newHighScore(score *newHighScore);
+    static void newHighScore(score *newHighScore);
     void saveHighScore();
     void addScore(string playerName, int score);
     highscore() { };
@@ -22,6 +22,8 @@ class interfaceHighScore : public highscore
 {
 private:
     BITMAP *hsBackground;
+    FONT *hsFont;
+    PALLETE pallete;
 public:
     void displayHighScore();
     interfaceHighScore();

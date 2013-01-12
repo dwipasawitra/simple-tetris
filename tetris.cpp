@@ -32,7 +32,7 @@ void tetris::initWindow()
     }
     else
     {
-        set_gfx_mode(GFX_GDI, 640, 480, 0, 0);
+//        set_gfx_mode(GFX_GDI, 640, 480, 0, 0);
 
     }
 
@@ -129,6 +129,7 @@ void tetris::mainMenu()    // Open Main menu interface
         }
         else if(key[KEY_ENTER])
         {
+            while(key[KEY_ENTER]);
             switch(selection)
             {
                 case 0:
@@ -151,12 +152,11 @@ void tetris::tetrisInterface() // Open Tetris interface
 {
     this->clearWindow();
 
-
-    // Initialization game Interface
-    gameIface->initScreen();
-
     // Now interfaceTetris class will do the rest thing;
     gameIface->newGame();
+
+    // After game done and back to menu, here we goes
+    this->interfaceState = TETRIS_INTERFACE_MENU;
 
 
 }
@@ -169,7 +169,9 @@ void tetris::highScores()  // Open highscore interface
     hsIface->displayHighScore();
 
 
-    while(!key[KEY_ESC]);
+    while(!key[KEY_ESC]) { }
+    this->interfaceState = TETRIS_INTERFACE_MENU;
+
 }
 
 tetris::tetris(int startInterface)

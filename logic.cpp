@@ -26,7 +26,7 @@ int logic::get_nextShapeColor()
     return this->nextShapeColor;
 }
 
-bool logic::gameLogicIteration()
+void logic::gameLogicIteration()
 {
         int tickSpeed=2;
         while(tickSpeed--)
@@ -108,7 +108,6 @@ bool logic::gameLogicIteration()
 
 
     rest(this->gameLoopSpeed);
-    return false;
 
 }
 
