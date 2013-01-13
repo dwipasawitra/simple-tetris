@@ -41,9 +41,9 @@ void logic::gameLogicIteration()
                 this->newShapeColor = this->nextShapeColor;
                 this->newShape(nextShapeType);
 
-                //this->nextShapeType = rand() % 18;
+                this->nextShapeType = rand() % 18;
                 this->nextShapeColor = rand() % 5;
-                this->nextShapeType = SHAPE_1A;
+
                 //cout << "Next shape is : " << nextShapeType << endl;
                 this->gameState = GAME_STATE_NEWSHAPE_FALL;
 
@@ -85,7 +85,7 @@ void logic::gameLogicIteration()
                 }*/
             }
             rest(this->gameLoopSpeed);
-        }
+            }
             if(this->collideDetect())
                 {
                     //cek kedua

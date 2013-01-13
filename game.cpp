@@ -89,7 +89,7 @@ void interfaceTetris::requestPlayerName()
 
       textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, -1);
     }
-    while(!key[KEY_ENTER]);
+    while(!key[KEY_ENTER] || !strcmp(input, ""));
 
     // END KEYCODE READER //
 

@@ -32,7 +32,7 @@ void tetris::initWindow()
     }
     else
     {
-        set_gfx_mode(GFX_GDI, 640, 480, 0, 0);
+//        set_gfx_mode(GFX_GDI, 640, 480, 0, 0);
 
     }
 
