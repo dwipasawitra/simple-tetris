@@ -13,7 +13,7 @@ void control::receiveControl()
     {
         gameParent->gameLogic->moveLeft();
         gameParent->gameCanvas->redrawGraphic();
-        rest(GAME_LOOP_SPEED_TICKSPEED);
+        rest(GAME_LOOP_MOVEWAIT);
         /*while(key[KEY_LEFT] && n>0)
         {
             gameParent->gameLogic->moveLeft();
@@ -26,7 +26,7 @@ void control::receiveControl()
     {
         gameParent->gameLogic->moveRight();
         gameParent->gameCanvas->redrawGraphic();
-        rest(GAME_LOOP_SPEED_TICKSPEED);
+        rest(GAME_LOOP_MOVEWAIT);
         /*while(key[KEY_RIGHT] && n>0)
         {
             gameParent->gameLogic->moveRight();
@@ -37,8 +37,9 @@ void control::receiveControl()
     }
     if(key[KEY_UP])
     {
+
         gameParent->gameLogic->rotateShape();
-        rest(GAME_LOOP_SPEED_TICKSPEED);
+        while(key[KEY_UP]);
     }
     if(key[KEY_ESC])
     {
@@ -52,7 +53,11 @@ void control::receiveOnlyTurbo()
     if(key[KEY_DOWN])
     {
         gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_TURBO;
-        gameParent->gameLogic->tickSpeed = 2;
+        gameParent->gameLogic->tickSpeed = GAME_ITERATION_TICK_TOTAL_TURBO;
     }
-    else gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_NORMAL;
+    else
+    {
+        gameParent->gameLogic->gameLoopSpeed = GAME_LOOP_SPEED_NORMAL;
+        gameParent->gameLogic->tickSpeed = GAME_ITERATION_TICK_TOTAL;
+    }
 }

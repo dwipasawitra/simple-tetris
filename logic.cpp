@@ -3,6 +3,7 @@
 logic::logic(game *gameParent)
 {
     this->gameParent = gameParent;
+    this->tickSpeed = GAME_ITERATION_TICK_REST;
 }
 
 void logic::set_nextShapeType(int nextShapeType)
@@ -28,6 +29,7 @@ int logic::get_nextShapeColor()
 
 void logic::gameLogicIteration()
 {
+    /*
         int tickSpeed=2;
         while(tickSpeed--)
         {
@@ -74,15 +76,7 @@ void logic::gameLogicIteration()
                 // Step4: Get keyboard control command
                 gameParent->gameControl->receiveControl();
                 gameParent->gameCanvas->redrawGraphic();
-                 /*if(this->collideDetect())
-                {
-                    //cek kedua
-                    this->setAllStoned();
-                    this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
-                    this->destroyLine();
-                    gameParent->gameCanvas->redrawGraphic();
-                    gameParent->gameScore->incScore(GAME_SCORE_STONED);
-                }*/
+
             }
             rest(this->gameLoopSpeed);
             }
@@ -109,6 +103,64 @@ void logic::gameLogicIteration()
             }
 
 
+
+    rest(this->gameLoopSpeed);
+    */
+
+    // New gameIteation code
+    // Implemented by Wirama only on this "experiment branch"
+
+    int tickSpeed = this->tickSpeed;
+    bool canGoDown;
+
+    // Step0: If KEY_DOWN pressed, then turbo the speed
+    gameParent->gameControl->receiveOnlyTurbo();
+
+    // Step1: newShape from nextShapeType before
+    if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
+    {
+
+        this->newShapeColor = this->nextShapeColor;
+        this->newShape(nextShapeType);
+
+        this->nextShapeType = rand() % 18;
+        this->nextShapeColor = rand() % 5;
+
+
+        this->gameState = GAME_STATE_NEWSHAPE_FALL;
+
+    }
+
+    // Step2: Collision detector and control receive goes here
+    while(tickSpeed--)
+    {
+        // Step3: Collision detector
+        if(this->collideDetect())
+        {
+            //cout << "Collision happened" << endl;
+            this->setAllStoned();
+            this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
+            this->destroyLine();
+            gameParent->gameCanvas->redrawGraphic();
+            gameParent->gameScore->incScore(GAME_SCORE_STONED);
+            canGoDown = false;
+        }
+        else
+        {
+            gameParent->gameControl->receiveControl();
+            gameParent->gameCanvas->redrawGraphic();
+            canGoDown = true;
+
+        }
+        rest(GAME_ITERATION_TICK_REST);
+    }
+
+    // Step3: Go down
+    if(canGoDown)
+    {
+        this->goDown();
+        gameParent->gameCanvas->redrawGraphic();
+    }
 
     rest(this->gameLoopSpeed);
 
