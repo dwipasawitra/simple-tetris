@@ -105,16 +105,24 @@
 
 class block
 {
+
+
 private:
+
     BITMAP *blockImage;
     int state;
 
 public:
-    int posX, posY;
+    static BITMAP* blockImageCollection[BLOCK_COLOR_TOTAL];
+    static void loadBlockImage();
+    static void unloadBlockImage();
+
     BITMAP *getImage();
     void setColor(int newColor);
     int getState();
     void setState(int newState);
+
+
 
     block(int newColor, int newState);
 };

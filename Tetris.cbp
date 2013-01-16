@@ -44,6 +44,8 @@
 		<Unit filename="nextshape.h" />
 		<Unit filename="score.cpp" />
 		<Unit filename="score.h" />
+		<Unit filename="sound.cpp" />
+		<Unit filename="sound.h" />
 		<Unit filename="tetris.cpp" />
 		<Unit filename="tetris.h" />
 		<Unit filename="tinyxml2.cpp" />

@@ -23,6 +23,7 @@
 #include "music.h"
 #include "score.h"
 #include "highscores.h"
+#include "sound.h"
 
 class game
 {
@@ -47,6 +48,9 @@ protected:
     logic *gameLogic;
     music *gameMusic;
     score *gameScore;
+    sound *gameSound;
+
+    int selectedMidi;
 
     // Game variabel
     bool gameOver;
