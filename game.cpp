@@ -62,6 +62,7 @@ void interfaceTetris::requestPlayerName()
 
     do
     {
+
       if(keypressed())
       {
 
@@ -85,9 +86,11 @@ void interfaceTetris::requestPlayerName()
             if (n > 0) n--;
             input[n] = '\0';
          }
+         blit(this->newPlayerPopup, screen, 0, 0, 53.5 , 115, 533, 250);
+      textout_centre_ex(screen, this->gameFontBig, input, 320, 115+100, COLOR_BLACK, -1);
       }
 
-      textout_ex(screen, this->gameFontBig, input, 53.5 + 10, 115+100, COLOR_WHITE, -1);
+
     }
     while(!key[KEY_ENTER] || !strcmp(input, ""));
 
