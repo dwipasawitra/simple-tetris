@@ -10,6 +10,7 @@ private:
     void controlTurbo();
 public:
     void receiveControl();
+    void receiveControlLr();
     void receiveOnlyTurbo();
 
 

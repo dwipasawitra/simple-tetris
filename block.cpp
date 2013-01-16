@@ -14,6 +14,8 @@
 
 #include "block.h"
 
+BITMAP* block::blockImageCollection[BLOCK_COLOR_TOTAL];
+
 BITMAP *block::getImage()
 {
     return blockImage;
@@ -22,24 +24,23 @@ BITMAP *block::getImage()
 void block::setColor(int newColor)
 {
     // Depending on its color, choose the right bitmap
-
     switch(newColor)
     {
 
     case BLOCK_COLOR_BLACK:
-        this->blockImage = load_bitmap("block_black.bmp", NULL);
+        blockImage = blockImageCollection[BLOCK_COLOR_BLACK];
         break;
     case BLOCK_COLOR_BLUE:
-        this->blockImage = load_bitmap("block_blue.bmp", NULL);
+        blockImage = blockImageCollection[BLOCK_COLOR_BLUE];
         break;
     case BLOCK_COLOR_GREEN:
-        this->blockImage = load_bitmap("block_green.bmp", NULL);
+        blockImage = blockImageCollection[BLOCK_COLOR_GREEN];
         break;
     case BLOCK_COLOR_RED:
-        this->blockImage = load_bitmap("block_red.bmp", NULL);
+        blockImage = blockImageCollection[BLOCK_COLOR_RED];
         break;
     case BLOCK_COLOR_YELLOW:
-        this->blockImage = load_bitmap("block_yellow.bmp", NULL);
+        blockImage = blockImageCollection[BLOCK_COLOR_YELLOW];
         break;
 
     }
@@ -60,4 +61,23 @@ block::block(int newColor, int newBlockState)
     // Set bitmap depending on its color
     this->setColor(newColor);
     this->setState(newBlockState);
+}
+
+void block::loadBlockImage()
+{
+    cout << "Loaded block image" << endl;
+    block::blockImageCollection[BLOCK_COLOR_BLACK] = load_bitmap("block_black.pcx", NULL);
+    block::blockImageCollection[BLOCK_COLOR_BLUE] = load_bitmap("block_blue.pcx", NULL);
+    block::blockImageCollection[BLOCK_COLOR_GREEN] = load_bitmap("block_green.pcx", NULL);
+    block::blockImageCollection[BLOCK_COLOR_YELLOW] = load_bitmap("block_yellow.pcx", NULL);
+    block::blockImageCollection[BLOCK_COLOR_RED] = load_bitmap("block_red.pcx", NULL);
+}
+
+void block::unloadBlockImage()
+{
+    destroy_bitmap(block::blockImageCollection[BLOCK_COLOR_BLACK]);
+    destroy_bitmap(block::blockImageCollection[BLOCK_COLOR_BLUE]);
+    destroy_bitmap(block::blockImageCollection[BLOCK_COLOR_GREEN]);
+    destroy_bitmap(block::blockImageCollection[BLOCK_COLOR_YELLOW]);
+    destroy_bitmap(block::blockImageCollection[BLOCK_COLOR_RED]);
 }
