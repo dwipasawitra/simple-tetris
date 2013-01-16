@@ -87,7 +87,7 @@ void interfaceTetris::requestPlayerName()
             input[n] = '\0';
          }
          blit(this->newPlayerPopup, screen, 0, 0, 53.5 , 115, 533, 250);
-      textout_centre_ex(screen, this->gameFontBig, input, 320, 115+100, COLOR_BLACK, -1);
+         textout_centre_ex(screen, this->gameFontBig, input, 320, 115+100, COLOR_BLACK, -1);
       }
 
 
@@ -132,10 +132,13 @@ void interfaceTetris::newGame()
     while(!key[KEY_ENTER]);
 
     // Play the music
-    this->gameMusic->playMusic(MUSIC_NUM_1);
+    this->gameMusic->playMusic(this->selectedMidi);
 
     // OK, game loop starter until you are game over
     this->gameLoop();
+
+    // Stop the music
+    this->gameMusic->stopMusic();
 
     // Game over interface
     this->gameOverInterface();
@@ -194,6 +197,31 @@ game::game()
     this->gameFontBig = load_font("font.pcx", this->pallete, NULL);
     this->pausePopup = load_bitmap("paused.bmp", NULL);
     this->gameOverPopup = load_bitmap("gameover.bmp", NULL);
+
+    this->selectedMidi = MUSIC_NUM_1;
+
+    // Load block image
+    block::loadBlockImage();
+}
+
+game::~game()
+{
+    delete this->gameCanvas;
+    delete this->gameControl;
+    delete this->gameLogic;
+    delete this->gameNextShape;
+    delete this->gameMusic;
+    delete this->gameScore;
+
+    // Unload some image
+    destroy_bitmap(this->background);
+    destroy_bitmap(this->newPlayerPopup);
+    destroy_bitmap(this->pausePopup);
+    destroy_bitmap(this->gameOverPopup);
+
+    // Unload block image
+    block::unloadBlockImage();
+
 }
 
 void game::gameLoop()
@@ -254,6 +282,9 @@ void game::pauseGame()
     bool selected = false;
     while(key[KEY_ESC]);
 
+    // Pause the music
+    this->gameMusic->pauseMusic();
+
     // Tampilkan popup untuk pause
     blit(this->pausePopup, screen, 0, 0, 53.5 , 115, 533, 250);
 
@@ -266,6 +297,7 @@ void game::pauseGame()
             while(key[KEY_ENTER]);
             selected = true;
             this->initScreen();
+            this->gameMusic->resumeMusic();
         }
         else if(key[KEY_ESC])
         {
@@ -296,9 +328,11 @@ void game::initScreen()
 
     // Draw game Canvas
     this->gameCanvas->redrawBorder();
+    this->gameCanvas->redrawGraphicAll();
 
     // Display Next Shape
     this->gameNextShape->redrawNextShape();
+
 
     // Display score board
 

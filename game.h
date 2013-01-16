@@ -48,6 +48,8 @@ protected:
     music *gameMusic;
     score *gameScore;
 
+    int selectedMidi;
+
     // Game variabel
     bool gameOver;
 

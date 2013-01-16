@@ -110,11 +110,13 @@ void logic::gameLogicIteration()
     // New gameIteation code
     // Implemented by Wirama only on this "experiment branch"
 
+
     int tickSpeed = this->tickSpeed;
     bool canGoDown;
 
-    // Step0: If KEY_DOWN pressed, then turbo the speed
-    gameParent->gameControl->receiveOnlyTurbo();
+
+    // Step0 Destory line if occur
+    this->destroyLine();
 
     // Step1: newShape from nextShapeType before
     if(this->gameState == GAME_STATE_NEWSHAPE_COMEOUT)
@@ -134,21 +136,21 @@ void logic::gameLogicIteration()
     // Step2: Collision detector and control receive goes here
     while(tickSpeed--)
     {
+        //If KEY_DOWN pressed, then turbo the speed
+        gameParent->gameControl->receiveOnlyTurbo();
+
         // Step3: Collision detector
         if(this->collideDetect())
         {
             //cout << "Collision happened" << endl;
             this->setAllStoned();
             this->gameState = GAME_STATE_NEWSHAPE_COMEOUT;
-            this->destroyLine();
-            gameParent->gameCanvas->redrawGraphic();
             gameParent->gameScore->incScore(GAME_SCORE_STONED);
             canGoDown = false;
         }
         else
         {
             gameParent->gameControl->receiveControl();
-            gameParent->gameCanvas->redrawGraphic();
             canGoDown = true;
 
         }
@@ -161,6 +163,7 @@ void logic::gameLogicIteration()
         this->goDown();
         gameParent->gameCanvas->redrawGraphic();
     }
+
 
     rest(this->gameLoopSpeed);
 

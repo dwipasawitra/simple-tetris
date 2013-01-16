@@ -22,9 +22,11 @@ int main()
 {
 	// Game instatination and start
 	initAllegro();
+
 	srand(time(NULL));
     tetris *gameWindow = new tetris(TETRIS_INTERFACE_MENU);
     gameWindow->start();
+
     return 0;
 }
 END_OF_MAIN();

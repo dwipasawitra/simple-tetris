@@ -4,6 +4,42 @@ canvas::canvas(game *gameParent)
 {
     this->gameParent = gameParent;
     this->gameBorder = load_bitmap("border.bmp", NULL);
+
+    // Initialize gameCanvasDraw
+    for(int i = 0; i < GAME_MAX_X; i++)
+    {
+        for(int j = 0; j < GAME_MAX_Y; j++)
+        {
+            this->gameCanvasDraw[i][j] = false;
+        }
+    }
+}
+
+canvas::~canvas()
+{
+    // Destroy game border bitmap
+    destroy_bitmap(this->gameBorder);
+}
+
+void canvas::redrawGraphicAll()
+{
+    int i, j;
+
+    // OLD INEFFICIENT ALGORITHM
+    for(i=0;i<GAME_MAX_X;i++)
+    {
+        for(j=0;j<GAME_MAX_Y;j++)
+        {
+            if(gameParent->gameBlock[i][j] != NULL)
+            {
+                this->drawBlock(i, j, gameParent->gameBlock[i][j]);
+            }
+            else
+            {
+                this->clearBlock(i, j);
+            }
+        }
+    }
 }
 
 void canvas::redrawGraphic()
@@ -17,12 +53,10 @@ void canvas::redrawGraphic()
     // No:  Draw it when matrix cell present
     //      Keep it when matrix cell doesn't present
 
-    // NOT IMPLEMENTED YET, Using inefficient redrawing algorithm
-
 
     int i, j;
 
-    /*
+
     for(i=0;i<GAME_MAX_X;i++)
     {
         for(j=0;j<GAME_MAX_Y;j++)
@@ -43,29 +77,17 @@ void canvas::redrawGraphic()
             }
         }
     }
-    */
 
 
 
-    for(i=0;i<GAME_MAX_X;i++)
-    {
-        for(j=0;j<GAME_MAX_Y;j++)
-        {
-            if(gameParent->gameBlock[i][j] != NULL)
-            {
-                this->drawBlock(i, j, gameParent->gameBlock[i][j]);
-            }
-            else
-            {
-                this->clearBlock(i, j);
-            }
-        }
-    }
 
 }
 
 void canvas::drawBlock(int x, int y, block *property)
 {
+    // Save the state into gameCanvasDraw matrices
+    this->gameCanvasDraw[x][y] = true;
+
     int drawPointX, drawPointY;
     int blockColor;
 
@@ -87,16 +109,16 @@ void canvas::drawBlock(int x, int y, block *property)
 
     blit(property->getImage(), screen, 0, 0, drawPointX, drawPointY, 20, 20);
 
-    // Save drawPoint on property
-    // So we can check if there is a block on that point later
-    //property->posX = drawPointX;
-    //property->poxY = drawPointY;
+
 
 }
 
 void canvas::clearBlock(int x, int y)
 {
     int drawPointX, drawPointY;
+
+    // Save the state into gameCanvasDraw matrices
+    this->gameCanvasDraw[x][y] = false;
 
     // If Y-axis is 0 to 3, you can't draw it
     if(y>=0 && y<=3)
@@ -114,6 +136,7 @@ void canvas::clearBlock(int x, int y)
 
     // From left top point, draw background in that position
     blit(gameParent->background, screen, drawPointX, drawPointY, drawPointX, drawPointY, 20, 20);
+
 
     // Done
 }
@@ -143,6 +166,11 @@ bool canvas::checkPoint(int x, int y)
     return is_inside_bitmap(gameParent->background, checkPointX, checkPointY, 0);
 }
 */
+
+bool canvas::checkPoint(int x, int y)
+{
+    return this->gameCanvasDraw[x][y];
+}
 
 void canvas::redrawBorder()
 {

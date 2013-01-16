@@ -14,6 +14,7 @@ public:
     void saveHighScore();
     void addScore(string playerName, int score);
     highscore() { };
+    ~highscore();
 
 };
 

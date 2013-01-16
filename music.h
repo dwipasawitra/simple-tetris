@@ -8,6 +8,9 @@ private:
 
 public:
     music();
-    void playMusic(int musicNum);
-    void stopMusic(int musicNum);
+    ~music();
+    void playMusic(int selectedMidi);
+    void stopMusic();
+    void pauseMusic();
+    void resumeMusic();
 };

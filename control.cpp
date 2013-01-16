@@ -39,6 +39,7 @@ void control::receiveControl()
     {
 
         gameParent->gameLogic->rotateShape();
+        gameParent->gameCanvas->redrawGraphic();
         while(key[KEY_UP]);
     }
     if(key[KEY_ESC])

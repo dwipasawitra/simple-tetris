@@ -179,7 +179,7 @@ tetris::tetris(int startInterface)
     interfaceState = startInterface;
 
     // Load some bitmap
-    this->menuBackground = load_bitmap("menu.bmp", NULL);
+    this->menuBackground = load_bitmap("menu.pcx", NULL);
     this->logoBig = load_bitmap("tetris-logo-big.bmp", NULL);
     this->menuSelection = load_bitmap("selection.bmp", NULL);
     this->menuItem = load_bitmap("menu-item.bmp", NULL);

@@ -86,12 +86,25 @@ void highscore::addScore(string playerName, int scorePoint)
     this->highScoreData.push_back(newScore);
 }
 
+highscore::~highscore()
+{
+    // Delete all of score in highScoreData
+    list<score *>::iterator it = this->highScoreData.begin();
+    for(int i=0; i < this->highScoreData.size(); i++)
+    {
+        if((*it) != NULL)
+        {
+            delete (*it);
+        }
+        ++it;
+    }
+}
 
 // Interface High Score part
 interfaceHighScore::interfaceHighScore()
 {
     // Load background bitmap
-    this->hsBackground = load_bitmap("highscore.bmp", NULL);
+    this->hsBackground = load_bitmap("highscore.pcx", NULL);
 
     // Load font
     hsFont = load_font("font-highscore.pcx", pallete, NULL);
@@ -119,3 +132,5 @@ void interfaceHighScore::displayHighScore()
     blit(buffer, screen, 0, 0, 0, 0, 640, 480);
 
 }
+
+

@@ -7,12 +7,27 @@ music::music()
 
 }
 
-void music::playMusic(int musicNum)
+void music::playMusic(int selectedMidi)
 {
-    play_midi(midi[musicNum], 1);
+    play_midi(midi[selectedMidi], 1);
 }
 
-void music::stopMusic(int stopMusic)
+void music::stopMusic()
 {
-    // Not implemented yet
+    stop_midi();
+}
+
+void music::pauseMusic()
+{
+    midi_pause();
+}
+
+void music::resumeMusic()
+{
+    midi_resume();
+}
+
+music::~music()
+{
+    destroy_midi(this->midi[MUSIC_NUM_1]);
 }
