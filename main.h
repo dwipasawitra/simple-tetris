@@ -19,6 +19,7 @@
 #include <list>
 #include <cstdlib>
 #include "tinyxml2.h"
+#include "general.h"
 
 
 #define GAME_LOOP_SPEED_NORMAL 10
@@ -36,6 +37,19 @@
 #define GAME_MAX_Y 26
 #define GAME_SCORE_DESTROY 50
 #define GAME_SCORE_STONED 5
+#define GAME_GAMEOVER_Y 4
+#define GAME_ERROR_OUT_OF_BOUND 0
+
+#define GAME_SOUND_STONED 0
+#define GAME_SOUND_DESTROY_LINE 1
+#define GAME_SOUND_BEGIN 2
+#define GAME_SOUND_GAME_OVER 3
+#define GAME_SOUND_MOVE 4
+#define GAME_SOUND_ROTATE 5
+#define GAME_SOUND_NUMBER 6
+#define GAME_SOUND_PANNING 128
+#define GAME_SOUND_PITCH 1000
+#define GAME_SOUND_VOLUME 255
 
 #define TETRIS_INTERFACE_MENU 0
 #define TETRIS_INTERFACE_GAME 1

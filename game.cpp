@@ -133,6 +133,7 @@ void interfaceTetris::newGame()
 
     // Play the music
     this->gameMusic->playMusic(this->selectedMidi);
+    this->gameSound->playSound(GAME_SOUND_BEGIN);
 
     // OK, game loop starter until you are game over
     this->gameLoop();
@@ -189,6 +190,7 @@ game::game()
     this->gameLogic = new logic(this);
     this->gameNextShape = new nextshape();
     this->gameMusic = new music();
+    this->gameSound = new sound();
     this->gameScore = NULL;
 
     // Get some image
@@ -212,6 +214,7 @@ game::~game()
     delete this->gameNextShape;
     delete this->gameMusic;
     delete this->gameScore;
+    delete this->gameSound;
 
     // Unload some image
     destroy_bitmap(this->background);

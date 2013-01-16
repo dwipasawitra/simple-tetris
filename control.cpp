@@ -5,12 +5,32 @@ control::control(game *gameParent)
     this->gameParent = gameParent;
 }
 
+void control::receiveControlLr()
+{
+    if(key[KEY_LEFT])
+    {
+        gameParent->gameSound->playSound(GAME_SOUND_MOVE);
+        gameParent->gameLogic->moveLeft();
+        gameParent->gameCanvas->redrawGraphic();
+        rest(GAME_LOOP_MOVEWAIT);
+
+    }
+    if(key[KEY_RIGHT])
+    {
+        gameParent->gameSound->playSound(GAME_SOUND_MOVE);
+        gameParent->gameLogic->moveRight();
+        gameParent->gameCanvas->redrawGraphic();
+
+    }
+}
+
 void control::receiveControl()
 {
     int n=6;
 
     if(key[KEY_LEFT])
     {
+        gameParent->gameSound->playSound(GAME_SOUND_MOVE);
         gameParent->gameLogic->moveLeft();
         gameParent->gameCanvas->redrawGraphic();
         rest(GAME_LOOP_MOVEWAIT);
@@ -24,6 +44,7 @@ void control::receiveControl()
     }
     if(key[KEY_RIGHT])
     {
+        gameParent->gameSound->playSound(GAME_SOUND_MOVE);
         gameParent->gameLogic->moveRight();
         gameParent->gameCanvas->redrawGraphic();
         rest(GAME_LOOP_MOVEWAIT);
@@ -37,7 +58,7 @@ void control::receiveControl()
     }
     if(key[KEY_UP])
     {
-
+        gameParent->gameSound->playSound(GAME_SOUND_ROTATE);
         gameParent->gameLogic->rotateShape();
         gameParent->gameCanvas->redrawGraphic();
         while(key[KEY_UP]);
